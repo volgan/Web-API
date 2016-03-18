@@ -79,16 +79,28 @@ namespace Web.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
             if (CustomerExists(customer.Email))
             {
-                return BadRequest(ModelState);
+                if (customer.Password.Equals("null"))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    if (CheckLogin(customer.Email, customer.Password) == 0)
+                    {
+                        return Conflict();
+                    }
+                    else customer.CustomerID = CheckLogin(customer.Email, customer.Password);
+                }
             }
             else
             {
                 db.Customers.Add(customer);
                 await db.SaveChangesAsync();
             }
-            
+           
             return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
         }
 
@@ -124,6 +136,18 @@ namespace Web.Controllers
         private bool CustomerExists(long ID)
         {
             return db.Customers.Count(e => e.CustomerID == ID) > 0;
+        }
+        private long CheckLogin(String email, String password)
+        {
+            var query = (from cus in db.Customers
+                        where 
+                            (cus.Email.Equals(email) && cus.Password.Equals(password))
+                        select cus.CustomerID).ToList();
+            for (int i = 0; i < query.Count; i++)
+            {
+                return query[i];
+            }
+            return 0;
         }
     }
 }
