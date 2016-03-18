@@ -1,0 +1,40 @@
+<legend>Hỏi, đáp về sản phẩm</legend>
+<form ng-submit="vm.addCmt(vm.Item)">
+    <fieldset>
+        <textarea class="areaCmt" ng-model="vm.cmt" placeholder="Ý kiến của bạn về sản phẩm ..."></textarea>
+        <button type="submit" class="md-raised md-primary md-button btnCmt">
+            <strong>GỬI</strong>
+        </button>
+    </fieldset>
+</form>
+<ul>
+    <h4>Mới nhất</h4>
+    <li ng-repeat="cmt in vm.cmts.slice().reverse() track by $index">
+        <blockquote>
+            <img class="imgCmt" src="../images/User-Login.png">
+            <cite class="nameCmt">Quang Nhật</cite>
+            <pre class="preCmt">{{cmt}}</pre>
+            <a class="exBtnCmt">
+                <button>Thích</button>
+                <button ng-click="vm.displayRepForm()">Trả lời</button>
+                <button ng-click="vm.displayRep()">Xem tất cả câu trả lời</button>
+            </a>
+            <form ng-style="vm.showRepForm" ng-submit="vm.addRep(vm.Item)">
+                <fieldset class="replyCmt">
+                    <textarea class="areaCmt" ng-model="vm.rep" placeholder="Ý kiến của bạn ..."></textarea>
+                    <button type="submit" class="md-raised md-primary md-button btnCmt" ng-click="vm.hideRepForm()">
+                        <strong>GỬI</strong>
+                    </button>
+                </fieldset>
+            </form>
+            <fieldset ng-style="vm.showRep" ng-repeat="rep in vm.replies.slice().reverse() track by $index">
+                <img class="imgRep" src="../images/User-Login.png">
+                <cite class="nameRep">Quang Nhật</cite>
+                <pre class="preRep">{{rep}}</pre>
+                <a class="exBtnRep">
+                    <button>Thích</button>
+                </a>
+            </fieldset>
+        </blockquote>
+    </li>
+</ul>
