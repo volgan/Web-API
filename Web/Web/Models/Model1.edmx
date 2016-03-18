@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="LaptopID" />
+          </Key>
+          <Property Name="LaptopID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="bigint" Nullable="false" />
+          <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="slide" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="images" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_Manf" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_Tech" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_Speed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_Cache" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CPU_MaxSpeed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MainBoard_Chipset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MainBoard_Bus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MainBoard_SupporRam" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Storage_Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Storage_RAM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Storage_Bus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HardDisk_Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HardDisk_Capacity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenSize" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenResolution" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenTech" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="touchScreen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Graphics_Chipset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Graphics_Capacity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Graphics_Design" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Audio_Channels" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Audio_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CD" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CD_Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Interfaces" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Interfaces_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LAN" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wifi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Network_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CardReader_Support" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CardReader_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Webcam_Resolution" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Webcam_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Battery" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dimensions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="weight" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductsID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prices" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="real" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="bigint" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="RequriedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="slide" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="images" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="bigint" Nullable="false" />
+          <Property Name="manuf" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descImg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenTech" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenResolution" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenSize" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="touchScreen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="glassTouch" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraBehind_primary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraBehind_film" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraBehind_Flash" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraBehind_Advanced" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraFront_primary" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraFront_film" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraFront_VideoCall" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraFront_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Chipset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumCore" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Speed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GPU" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RAM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ROM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="availability" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="memoryCard" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaximumSupport" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TwoG" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThreeG" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FourG" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumSIM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wifi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GPS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Bluetooth" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NFC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Charger" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="audioJack" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Connection_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Design_Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Material" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dimensions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="weight" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Battery_Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="CategoryID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tablet">
+          <Key>
+            <PropertyRef Name="TabletID" />
+          </Key>
+          <Property Name="TabletID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="slide" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="images" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="bigint" Nullable="false" />
+          <Property Name="manuf" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descImg" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenTech" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenResolution" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="screenSize" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="touchScreen" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraBehind" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="film" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Advanced" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CameraFront" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Chipset" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumCore" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Speed" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GPU" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RAM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ROM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="availability" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="memoryCard" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaximumSupport" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ThreeG" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FourG" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SIM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Wifi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GPS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Bluetooth" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="USB" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HDMI" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="audioJack" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Connection_Other" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="dimensions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="weight" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Battery_Type" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_OrderDetails_Orders" />-->
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebServicesModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laptop" EntityType="Self.Laptop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phone" EntityType="Self.Phone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tablet" EntityType="Self.Tablet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Laptop">
+          <Key>
+            <PropertyRef Name="LaptopID" />
+          </Key>
+          <Property Name="LaptopID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <Property Name="icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slide" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_Manf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_Tech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_Speed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_Cache" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU_MaxSpeed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MainBoard_Chipset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MainBoard_Bus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MainBoard_SupporRam" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Storage_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Storage_RAM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Storage_Bus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HardDisk_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HardDisk_Capacity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenResolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenTech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="touchScreen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Graphics_Chipset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Graphics_Capacity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Graphics_Design" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Audio_Channels" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Audio_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CD_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Interfaces" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Interfaces_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Wifi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Network_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardReader_Support" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardReader_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Webcam_Resolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Webcam_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Battery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dimensions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="weight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductsID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prices" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Single" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slide" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <Property Name="manuf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenTech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenResolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="touchScreen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="glassTouch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraBehind_primary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraBehind_film" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraBehind_Flash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraBehind_Advanced" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraFront_primary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraFront_film" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraFront_VideoCall" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraFront_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Chipset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumCore" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Speed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GPU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RAM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ROM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="availability" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="memoryCard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaximumSupport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TwoG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThreeG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FourG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumSIM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Wifi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bluetooth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NFC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Charger" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="audioJack" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Connection_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Design_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Material" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dimensions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="weight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Battery_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="CategoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tablet">
+          <Key>
+            <PropertyRef Name="TabletID" />
+          </Key>
+          <Property Name="TabletID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slide" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <Property Name="manuf" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descImg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenTech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenResolution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="screenSize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="touchScreen" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraBehind" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="film" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Advanced" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CameraFront" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Chipset" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumCore" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Speed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GPU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RAM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ROM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="availability" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="memoryCard" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaximumSupport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThreeG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FourG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SIM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Wifi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bluetooth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HDMI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="audioJack" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Connection_Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dimensions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="weight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Battery_Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebServicesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Laptops" EntityType="Self.Laptop" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Phones" EntityType="Self.Phone" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tablets" EntityType="Self.Tablet" />
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="WebServicesModel.Customer" />
+          <EntitySet Name="Orders" EntityType="WebServicesModel.Order" />
+          <AssociationSet Name="FK_Orders_Customer" Association="WebServicesModel.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="WebServicesModel.FK_Orders_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RequriedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="WebServicesModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Orders_Customer">
+          <End Type="WebServicesModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="WebServicesModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebServicesModelStoreContainer" CdmEntityContainer="WebServicesEntities1">
+          <EntitySetMapping Name="Laptops">
+            <EntityTypeMapping TypeName="WebServicesModel.Laptop">
+              <MappingFragment StoreEntitySet="Laptop">
+                <ScalarProperty Name="LaptopID" ColumnName="LaptopID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="slide" ColumnName="slide" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="CPU_Manf" ColumnName="CPU_Manf" />
+                <ScalarProperty Name="CPU_Tech" ColumnName="CPU_Tech" />
+                <ScalarProperty Name="CPU_Type" ColumnName="CPU_Type" />
+                <ScalarProperty Name="CPU_Speed" ColumnName="CPU_Speed" />
+                <ScalarProperty Name="CPU_Cache" ColumnName="CPU_Cache" />
+                <ScalarProperty Name="CPU_MaxSpeed" ColumnName="CPU_MaxSpeed" />
+                <ScalarProperty Name="MainBoard_Chipset" ColumnName="MainBoard_Chipset" />
+                <ScalarProperty Name="MainBoard_Bus" ColumnName="MainBoard_Bus" />
+                <ScalarProperty Name="MainBoard_SupporRam" ColumnName="MainBoard_SupporRam" />
+                <ScalarProperty Name="Storage_Type" ColumnName="Storage_Type" />
+                <ScalarProperty Name="Storage_RAM" ColumnName="Storage_RAM" />
+                <ScalarProperty Name="Storage_Bus" ColumnName="Storage_Bus" />
+                <ScalarProperty Name="HardDisk_Type" ColumnName="HardDisk_Type" />
+                <ScalarProperty Name="HardDisk_Capacity" ColumnName="HardDisk_Capacity" />
+                <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+                <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+                <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+                <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+                <ScalarProperty Name="Graphics_Chipset" ColumnName="Graphics_Chipset" />
+                <ScalarProperty Name="Graphics_Capacity" ColumnName="Graphics_Capacity" />
+                <ScalarProperty Name="Graphics_Design" ColumnName="Graphics_Design" />
+                <ScalarProperty Name="Audio_Channels" ColumnName="Audio_Channels" />
+                <ScalarProperty Name="Audio_Other" ColumnName="Audio_Other" />
+                <ScalarProperty Name="CD" ColumnName="CD" />
+                <ScalarProperty Name="CD_Type" ColumnName="CD_Type" />
+                <ScalarProperty Name="Interfaces" ColumnName="Interfaces" />
+                <ScalarProperty Name="Interfaces_Other" ColumnName="Interfaces_Other" />
+                <ScalarProperty Name="LAN" ColumnName="LAN" />
+                <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+                <ScalarProperty Name="Network_Other" ColumnName="Network_Other" />
+                <ScalarProperty Name="CardReader_Support" ColumnName="CardReader_Support" />
+                <ScalarProperty Name="CardReader_Other" ColumnName="CardReader_Other" />
+                <ScalarProperty Name="Webcam_Resolution" ColumnName="Webcam_Resolution" />
+                <ScalarProperty Name="Webcam_Other" ColumnName="Webcam_Other" />
+                <ScalarProperty Name="Battery" ColumnName="Battery" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="Prices" ColumnName="Prices" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phones">
+            <EntityTypeMapping TypeName="WebServicesModel.Phone">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="slide" ColumnName="slide" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="manuf" ColumnName="manuf" />
+                <ScalarProperty Name="descImg" ColumnName="descImg" />
+                <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+                <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+                <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+                <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+                <ScalarProperty Name="glassTouch" ColumnName="glassTouch" />
+                <ScalarProperty Name="CameraBehind_primary" ColumnName="CameraBehind_primary" />
+                <ScalarProperty Name="CameraBehind_film" ColumnName="CameraBehind_film" />
+                <ScalarProperty Name="CameraBehind_Flash" ColumnName="CameraBehind_Flash" />
+                <ScalarProperty Name="CameraBehind_Advanced" ColumnName="CameraBehind_Advanced" />
+                <ScalarProperty Name="CameraFront_primary" ColumnName="CameraFront_primary" />
+                <ScalarProperty Name="CameraFront_film" ColumnName="CameraFront_film" />
+                <ScalarProperty Name="CameraFront_VideoCall" ColumnName="CameraFront_VideoCall" />
+                <ScalarProperty Name="CameraFront_Other" ColumnName="CameraFront_Other" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Chipset" ColumnName="Chipset" />
+                <ScalarProperty Name="NumCore" ColumnName="NumCore" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="GPU" ColumnName="GPU" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="ROM" ColumnName="ROM" />
+                <ScalarProperty Name="availability" ColumnName="availability" />
+                <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
+                <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
+                <ScalarProperty Name="TwoG" ColumnName="TwoG" />
+                <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
+                <ScalarProperty Name="FourG" ColumnName="FourG" />
+                <ScalarProperty Name="NumSIM" ColumnName="NumSIM" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
+                <ScalarProperty Name="NFC" ColumnName="NFC" />
+                <ScalarProperty Name="Charger" ColumnName="Charger" />
+                <ScalarProperty Name="audioJack" ColumnName="audioJack" />
+                <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
+                <ScalarProperty Name="Design_Type" ColumnName="Design_Type" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="WebServicesModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="WebServicesModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tablets">
+            <EntityTypeMapping TypeName="WebServicesModel.Tablet">
+              <MappingFragment StoreEntitySet="Tablet">
+                <ScalarProperty Name="TabletID" ColumnName="TabletID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="slide" ColumnName="slide" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="manuf" ColumnName="manuf" />
+                <ScalarProperty Name="descImg" ColumnName="descImg" />
+                <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+                <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+                <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+                <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+                <ScalarProperty Name="CameraBehind" ColumnName="CameraBehind" />
+                <ScalarProperty Name="film" ColumnName="film" />
+                <ScalarProperty Name="Advanced" ColumnName="Advanced" />
+                <ScalarProperty Name="CameraFront" ColumnName="CameraFront" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Chipset" ColumnName="Chipset" />
+                <ScalarProperty Name="NumCore" ColumnName="NumCore" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="GPU" ColumnName="GPU" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="ROM" ColumnName="ROM" />
+                <ScalarProperty Name="availability" ColumnName="availability" />
+                <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
+                <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
+                <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
+                <ScalarProperty Name="FourG" ColumnName="FourG" />
+                <ScalarProperty Name="SIM" ColumnName="SIM" />
+                <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
+                <ScalarProperty Name="USB" ColumnName="USB" />
+                <ScalarProperty Name="HDMI" ColumnName="HDMI" />
+                <ScalarProperty Name="audioJack" ColumnName="audioJack" />
+                <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
+                <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="WebServicesModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="WebServicesModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="RequriedDate" ColumnName="RequriedDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
