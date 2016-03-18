@@ -1,0 +1,15 @@
+.sale .modal-body .row {
+  margin-top: 20px; }
+  .sale .modal-body .row h4 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1em;
+    color: #4c4c4c;
+    padding: 0; }
+  .sale .modal-body .row .price {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1em;
+    color: #ea0101; }
+.sale .modal-body .col-xs-12, .sale .modal-body .col-sm-12, .sale .modal-body .col-md-6, .sale .modal-body .col-lg-6 {
+  padding-left: 0; }
