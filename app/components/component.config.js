@@ -61,16 +61,37 @@
             })
 
     }
-
-    function runFunc() {
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/vi_VN/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+    runFunc.$inject = ['SessionService', '$rootScope'];
+    function runFunc(SessionService, $rootScope) {
+        console.log(SessionService.get('login')==null);
+        if (SessionService.get('login')==null){
+            $rootScope.isLogin = false;
+        }
+        else {
+            $rootScope.isLogin = true;
+        }
     }
 
+})();
+(function(){
+    'use strict';
+    angular
+        .module('MyApp')
+        .factory('SessionService', SessionService);
+
+    SessionService.$inject = ['$http'];
+
+    function SessionService($http){
+        return{
+            set: function(key, value){
+                return sessionStorage.setItem(key, value);
+            },
+            get: function(key){
+                return sessionStorage.getItem(key);
+            },
+            destroy: function(key){
+                return sessionStorage.removeItem(key);
+            }
+        }
+    }
 })();

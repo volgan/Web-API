@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -44,7 +46,7 @@ namespace Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            customer.Password = getSHA256Hash(customer.Password);
             if (id != customer.CustomerID)
             {
                 return BadRequest();
@@ -74,7 +76,7 @@ namespace Web.Controllers
         // POST api/Customer
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> PostCustomer(Customer customer)
-        {
+        {            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -88,6 +90,7 @@ namespace Web.Controllers
                 }
                 else
                 {
+                    customer.Password = getSHA256Hash(customer.Password);
                     if (CheckLogin(customer.Email, customer.Password) == 0)
                     {
                         return Conflict();
@@ -97,6 +100,7 @@ namespace Web.Controllers
             }
             else
             {
+                customer.Password = getSHA256Hash(customer.Password);
                 db.Customers.Add(customer);
                 await db.SaveChangesAsync();
             }
@@ -148,6 +152,19 @@ namespace Web.Controllers
                 return query[i];
             }
             return 0;
+        }
+
+        private String getSHA256Hash(String text)
+        {
+            SHA256Managed sha256 = new SHA256Managed();
+            byte[] data = Encoding.UTF8.GetBytes(text);
+            byte[] result = sha256.ComputeHash(data);
+            StringBuilder strBuilder = new StringBuilder();
+            foreach (byte b in result)
+            {
+                strBuilder.Append(b.ToString("x1").ToLower());
+            }
+            return strBuilder.ToString();
         }
     }
 }

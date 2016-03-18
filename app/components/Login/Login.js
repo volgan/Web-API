@@ -8,25 +8,36 @@
         .module('MyApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$facebook', '$uibModal', '$http', '$rootScope'];
+    LoginController.$inject = ['$scope', '$facebook', '$uibModal', '$http', '$rootScope', 'SessionService'];
 
-    function LoginController($scope, $facebook, $uibModal, $http,$rootScope) {
+    function LoginController($scope, $facebook, $uibModal, $http, $rootScope, SessionService) {
         var vm               = this;
         vm.isOpen1           = false;
         vm.isOpen2           = false;
-        vm.Avatar            = "";
+        vm.Avatar            = "../images/User-Login.png";
         vm.Email             = "";
         vm.Name              = "";
         vm.Logout            = Logout;
         vm.animationsEnabled = true;
         vm.register          = register;
         vm.Login             = Login;
-        vm.isLogin           = false;
-        // vm.display = {display: 'none'};                
+        vm.isLogin           = $rootScope.isLogin;
+        $scope.sessionLogin  = SessionService.get('login');
+
+        // $scope.$watch('sessionLogin', function(NewVal, OldVal){            
+        //     if (NewVal == null || OldVal == null){
+        //         vm.isLogin = true;
+        //     }
+        //     else{
+        //         vm.isLogin = false;
+        //     }
+        // });
 
         function Logout() {
-            vm.isLogin          = false;
+            SessionService.destroy('login');
+            // vm.isLogin          = false;
             $rootScope.Customer = null;
+            console.log(SessionService.get('login'));
         };
 
         function register() {
@@ -60,7 +71,7 @@
             });
         }
 
-        function RegisterModalCtr($scope, $uibModalInstance, $rootScope) {
+        function RegisterModalCtr($scope, $uibModalInstance, $rootScope, SessionService) {
             var register        = this;
             register.isconfirm  = false;
             register.show       = false;
@@ -75,7 +86,7 @@
             register.Address    = "";
             register.Phone      = "";
             register.checkEmail = checkEmail;
-            register.ErrorEmail = true;
+            register.ErrorEmail = false;
             register.ID         = "";
 
             function cancel() {
@@ -136,9 +147,9 @@
 
                     $http(req).then(
                         function success(response) {
-                            vm.Avatar  = "../images/User-Login.png";
                             $rootScope.Customer = NewPerson;
-                            vm.isLogin        = true;
+                            vm.isLogin          = true;
+                            SessionService.set('login', response.data.CustomerID);
                             cancel();
                         },
                         function error(response) {
@@ -199,12 +210,12 @@
 
                     $http(req).then(
                         function success(response) {
-                            vm.Avatar  = "../images/User-Login.png";
                             $rootScope.Customer = response.data;
-                            vm.isLogin        = true;
+                            vm.isLogin          = true;
                             cancel();
                             login.checkLogin = false;
                             cancel();
+                            SessionService.set('login', response.data.CustomerID);
                         },
                         function error(response) {
                             login.checkLogin = true;
