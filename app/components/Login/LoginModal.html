@@ -18,6 +18,7 @@
                 <span ng-show="loginForm.email.$error.required && loginForm.email.$dirty">required</span>
                 <span ng-show="!loginForm.email.$error.required && loginForm.email.$error.email && loginForm.email.$dirty">invalid email</span>
             </md-input-container>
+
             <md-input-container class="md-block">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" ng-model="login.Pass" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required />
@@ -25,6 +26,7 @@
                 <span ng-show="!loginForm.password.$error.required && (loginForm.password.$error.minlength || loginForm.password.$error.maxlength) && loginForm.password.$dirty">Passwords must be between 8 and 20 characters.</span>
                 <span ng-show="!loginForm.password.$error.required && !loginForm.password.$error.minlength && !loginForm.password.$error.maxlength && loginForm.password.$error.pattern && loginForm.password.$dirty">Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
             </md-input-container>
+            <span ng-show="login.checkLogin" style="color: red">Email or password not true</span>
             <button type="submit" class="btn" ng-disabled="!loginForm.$valid" ng-click="login.LOGIN()">login</button>
         </form>
     </md-content>

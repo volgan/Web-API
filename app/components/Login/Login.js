@@ -8,26 +8,25 @@
         .module('MyApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$facebook', '$uibModal', '$http'];
+    LoginController.$inject = ['$scope', '$facebook', '$uibModal', '$http', '$rootScope'];
 
-    function LoginController($scope, $facebook, $uibModal, $http) {
-        var vm = this;
-        vm.isOpen1 = false;
-        vm.isOpen2 = false;
-        vm.display = true;
-        vm.Avatar = "";
-        vm.Email = "";
-        vm.Name = "";
-        vm.Logout = Logout;
+    function LoginController($scope, $facebook, $uibModal, $http,$rootScope) {
+        var vm               = this;
+        vm.isOpen1           = false;
+        vm.isOpen2           = false;
+        vm.Avatar            = "";
+        vm.Email             = "";
+        vm.Name              = "";
+        vm.Logout            = Logout;
         vm.animationsEnabled = true;
-        vm.register = register;
-        vm.poseidonLogin = poseidonLogin;
+        vm.register          = register;
+        vm.Login             = Login;
+        vm.isLogin           = false;
         // vm.display = {display: 'none'};                
 
         function Logout() {
-            vm.Email = "";
-            vm.Name = "";
-            vm.display = true;
+            vm.isLogin          = false;
+            $rootScope.Customer = null;
         };
 
         function register() {
@@ -36,7 +35,7 @@
                 animation: vm.animationsEnabled,
                 templateUrl: 'components/Login/RegisterModal.html',
                 controller: RegisterModalCtr,
-                controllerAs: 'register',
+                controllerAs: 'vm',
                 size: 'md',
                 resolve: {
                     Tablet: function() {
@@ -46,7 +45,7 @@
             });
         }
 
-        function poseidonLogin() {
+        function Login() {
             var modalInstance = $uibModal.open({
                 animation: vm.animationsEnabled,
                 templateUrl: 'components/Login/LoginModal.html',
@@ -61,25 +60,23 @@
             });
         }
 
-        function RegisterModalCtr($scope, $uibModalInstance) {
-            var register = this;
-            register.isconfirm = false;
-            register.show = false;
-            register.id = "";
-            register.name = "";
-            register.Email = "";
-            register.Pass = "";
-            register.RePass = "";
-            register.Register = Register;
-            register.cancel = cancel;
-            register.compare = compare;
-            register.Address = "";
-            register.Phone = "";
+        function RegisterModalCtr($scope, $uibModalInstance, $rootScope) {
+            var register        = this;
+            register.isconfirm  = false;
+            register.show       = false;
+            register.id         = "";
+            register.name       = "";
+            register.Email      = "";
+            register.Pass       = "";
+            register.RePass     = "";
+            register.Register   = Register;
+            register.cancel     = cancel;
+            register.compare    = compare;
+            register.Address    = "";
+            register.Phone      = "";
             register.checkEmail = checkEmail;
-            register.ErrorEmail = false;
-            register.ID = "";
-
-            angular.toJson()
+            register.ErrorEmail = true;
+            register.ID         = "";
 
             function cancel() {
                 $uibModalInstance.dismiss('cancel');
@@ -94,31 +91,30 @@
                     },
                     data: {
                         "Email": register.Email,
-                        "Password": "",
+                        "Password": "null",
                         "FullName": "",
                         "SDT": "",
                         "Address": ""
                     }
                 }
-                $http(req).then(
-                    function success(response) {                        
-                        register.ID = response.data.CustomerID;
-                        // $http.delete('http://localhost:2393/api/Customer'+(register.ID))
-                        register.ErrorEmail = false;
-                    },
-                    function error(response) {
-                        console.log("Error");
-                        register.ErrorEmail = true;
-                    }
-                );
+                if (register.Email.length != 0) {
+                    $http(req).then(
+                        function success(response) {
+                            register.ID = response.data.CustomerID;
+                            // $http.delete('http://localhost:2393/api/Customer'+(register.ID))
+                            register.ErrorEmail = true;
+                        },
+                        function error(response) {
+                            console.log("Error");
+                            register.ErrorEmail = false;
+                        }
+                    );
+                }
             }
 
             function Register() {
                 if (register.show == false && register.isconfirm == true) {
-                    vm.Avatar  = "../images/User-Login.png";
-                    vm.Email   = register.Email;
-                    vm.Name    = register.name;
-                    vm.display = false;
+                    
                     var NewPerson = {
                             CustomerID: register.ID,
                             Email: register.Email,
@@ -130,8 +126,8 @@
                         // NewPerson = NewPerson.toJSON();
                     angular.toJson(NewPerson);
                     req = {
-                        method: 'POST',
-                        url: 'http://localhost:2393/api/Customer/'+register.ID,
+                        method: 'PUT',
+                        url: 'http://localhost:2393/api/Customer/' + register.ID,
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -140,7 +136,10 @@
 
                     $http(req).then(
                         function success(response) {
-                            $rootScope.person = NewPerson;
+                            vm.Avatar  = "../images/User-Login.png";
+                            $rootScope.Customer = NewPerson;
+                            vm.isLogin        = true;
+                            cancel();
                         },
                         function error(response) {
 
@@ -167,22 +166,50 @@
             }
         }
 
-        function LoginModalCtrl($scope, $uibModalInstance) {
-            var login = this;
-            login.Email = "";
-            login.LOGIN = LOGIN;
-            login.cancel = cancel;
+        function LoginModalCtrl($scope, $uibModalInstance,$rootScope) {
+            var login        = this;
+            login.Email      = "";
+            login.LOGIN      = LOGIN;
+            login.cancel     = cancel;
+            login.checkLogin = false;
 
             function cancel() {
                 $uibModalInstance.dismiss('cancel');
             }
 
             function LOGIN() {
-                vm.Avatar = "../images/User-Login.png";
-                vm.Email = login.Email;
-                vm.Name = login.Email;
-                vm.display = false;
-                cancel();
+                var Customer = 
+                    {                        
+                        Email: login.Email,
+                        Password: login.Pass,
+                        FullName: "",
+                        SDT: "",
+                        Address: ""
+                    };
+                        // NewPerson = NewPerson.toJSON();
+                    angular.toJson(Customer);
+                    var req = {
+                    method: 'POST',
+                    url: 'http://localhost:2393/api/Customer',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: Customer
+                }
+
+                    $http(req).then(
+                        function success(response) {
+                            vm.Avatar  = "../images/User-Login.png";
+                            $rootScope.Customer = response.data;
+                            vm.isLogin        = true;
+                            cancel();
+                            login.checkLogin = false;
+                            cancel();
+                        },
+                        function error(response) {
+                            login.checkLogin = true;
+                        }
+                    );
             }
 
         }
