@@ -9,6 +9,7 @@
 
 namespace Web.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,7 +20,10 @@ namespace Web.Models
         public long Prices { get; set; }
         public int Quantity { get; set; }
         public Nullable<float> Discount { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Product Product { get; set; }
+        [JsonIgnore]
+        public virtual Order Order { get; set; }
     }
 }

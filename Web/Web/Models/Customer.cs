@@ -9,6 +9,7 @@
 
 namespace Web.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -26,6 +27,7 @@ namespace Web.Models
         public string SDT { get; set; }
         public string Address { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

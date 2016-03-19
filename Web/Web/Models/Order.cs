@@ -9,16 +9,24 @@
 
 namespace Web.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class Order
     {
+        public Order()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int OrderID { get; set; }
         public long CustomerID { get; set; }
         public System.DateTime OrderDate { get; set; }
         public System.DateTime RequriedDate { get; set; }
-    
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -60,6 +60,7 @@
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="Discount" Type="Single" />
     <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+    <NavigationProperty Name="Order" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
   </EntityType>
   <EntityType Name="Phone">
     <Key>
@@ -207,6 +208,10 @@
       <End Role="Customer" EntitySet="Customers" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
+    <AssociationSet Name="FK_OrderDetails_Orders" Association="WebServicesModel.FK_OrderDetails_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -223,13 +228,13 @@
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
-      <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="OrderID" Type="Int32" Nullable="false" />
     <Property Name="CustomerID" Type="Int64" Nullable="false" />
     <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="RequriedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Customer" Relationship="WebServicesModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="OrderDetails" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
   </EntityType>
   <Association Name="FK_Orders_Customer">
     <End Type="WebServicesModel.Customer" Role="Customer" Multiplicity="1" />
@@ -240,6 +245,18 @@
       </Principal>
       <Dependent Role="Order">
         <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetails_Orders">
+    <End Type="WebServicesModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="WebServicesModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

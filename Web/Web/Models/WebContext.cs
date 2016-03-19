@@ -28,6 +28,10 @@ namespace Web.Models
         public System.Data.Entity.DbSet<Web.Models.Customer> Customers { get; set; }
 
         public System.Data.Entity.DbSet<Web.Models.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<Web.Models.OrderDetail> OrderDetails { get; set; }
+
+        public System.Data.Entity.DbSet<Web.Models.Product> Products { get; set; }
     
     }
 }

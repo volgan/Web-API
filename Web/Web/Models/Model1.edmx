@@ -79,7 +79,6 @@
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="CustomerID" />
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="CustomerID" Type="bigint" Nullable="false" />
@@ -202,9 +201,18 @@
           <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Battery_Type" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
-        <Association Name="FK_OrderDetails_Orders" />-->
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderDetails_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
@@ -238,6 +246,10 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tablet" EntityType="Self.Tablet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
@@ -311,6 +323,7 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Discount" Type="Single" />
           <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+          <NavigationProperty Name="Order" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
         </EntityType>
         <EntityType Name="Phone">
           <Key>
@@ -458,6 +471,10 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="WebServicesModel.FK_OrderDetails_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -474,13 +491,13 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="CustomerID" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="CustomerID" Type="Int64" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RequriedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Customer" Relationship="WebServicesModel.FK_Orders_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="OrderDetails" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <Association Name="FK_Orders_Customer">
           <End Type="WebServicesModel.Customer" Role="Customer" Multiplicity="1" />
@@ -491,6 +508,18 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Type="WebServicesModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="WebServicesModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -703,7 +732,7 @@ warning 6035: The relationship 'FK_OrderDetails_Orders' has columns that are not
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

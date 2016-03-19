@@ -15,7 +15,6 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomerController : ApiController
     {
         private WebContext db = new WebContext();
@@ -76,12 +75,12 @@ namespace Web.Controllers
         // POST api/Customer
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> PostCustomer(Customer customer)
-        {            
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            
+
             if (CustomerExists(customer.Email))
             {
                 if (customer.Password.Equals("null"))
@@ -104,7 +103,7 @@ namespace Web.Controllers
                 db.Customers.Add(customer);
                 await db.SaveChangesAsync();
             }
-           
+
             return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
         }
 
@@ -144,20 +143,19 @@ namespace Web.Controllers
         private long CheckLogin(String email, String password)
         {
             var query = (from cus in db.Customers
-                        where 
-                            (cus.Email.Equals(email) && cus.Password.Equals(password))
-                        select cus.CustomerID).ToList();
+                         where
+                             (cus.Email.Equals(email) && cus.Password.Equals(password))
+                         select cus.CustomerID).ToList();
             for (int i = 0; i < query.Count; i++)
             {
                 return query[i];
             }
             return 0;
         }
-
-        private String getSHA256Hash(String text)
+        private String getSHA256Hash(String password)
         {
             SHA256Managed sha256 = new SHA256Managed();
-            byte[] data = Encoding.UTF8.GetBytes(text);
+            byte[] data = Encoding.UTF8.GetBytes(password);
             byte[] result = sha256.ComputeHash(data);
             StringBuilder strBuilder = new StringBuilder();
             foreach (byte b in result)

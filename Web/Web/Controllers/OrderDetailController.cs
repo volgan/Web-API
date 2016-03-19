@@ -13,43 +13,43 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class OrderController : ApiController
+    public class OrderDetailController : ApiController
     {
         private WebContext db = new WebContext();
 
-        // GET api/Order
-        public IQueryable<Order> GetOrders()
+        // GET api/OrderDetail
+        public IQueryable<OrderDetail> GetOrderDetails()
         {
-            return db.Orders;
+            return db.OrderDetails;
         }
 
-        // GET api/Order/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> GetOrder(int id)
+        // GET api/OrderDetail/5
+        [ResponseType(typeof(OrderDetail))]
+        public async Task<IHttpActionResult> GetOrderDetail(int id)
         {
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
+            OrderDetail orderdetail = await db.OrderDetails.FindAsync(id);
+            if (orderdetail == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(orderdetail);
         }
 
-        // PUT api/Order/5
-        public async Task<IHttpActionResult> PutOrder(int id, Order order)
+        // PUT api/OrderDetail/5
+        public async Task<IHttpActionResult> PutOrderDetail(int id, OrderDetail orderdetail)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != order.OrderID)
+            if (id != orderdetail.OrderID)
             {
                 return BadRequest();
             }
 
-            db.Entry(order).State = EntityState.Modified;
+            db.Entry(orderdetail).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!OrderDetailExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +70,16 @@ namespace Web.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST api/Order
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> PostOrder(Order order)
+        // POST api/OrderDetail
+        [ResponseType(typeof(OrderDetail))]
+        public async Task<IHttpActionResult> PostOrderDetail(OrderDetail orderdetail)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Orders.Add(order);
+            db.OrderDetails.Add(orderdetail);
 
             try
             {
@@ -87,7 +87,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (OrderExists(order.OrderID))
+                if (OrderDetailExists(orderdetail.OrderID))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace Web.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = order.OrderID }, order);
+            return CreatedAtRoute("DefaultApi", new { id = orderdetail.OrderID }, orderdetail);
         }
 
-        // DELETE api/Order/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> DeleteOrder(int id)
+        // DELETE api/OrderDetail/5
+        [ResponseType(typeof(OrderDetail))]
+        public async Task<IHttpActionResult> DeleteOrderDetail(int id)
         {
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
+            OrderDetail orderdetail = await db.OrderDetails.FindAsync(id);
+            if (orderdetail == null)
             {
                 return NotFound();
             }
 
-            db.Orders.Remove(order);
+            db.OrderDetails.Remove(orderdetail);
             await db.SaveChangesAsync();
 
-            return Ok(order);
+            return Ok(orderdetail);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace Web.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrderExists(int id)
+        private bool OrderDetailExists(int id)
         {
-            return db.Orders.Count(e => e.OrderID == id) > 0;
+            return db.OrderDetails.Count(e => e.OrderID == id) > 0;
         }
     }
 }
