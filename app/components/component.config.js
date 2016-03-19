@@ -5,6 +5,7 @@
             'ui.router',
             'ngMaterial',
             'ngMessages',
+            'material.svgAssetsCache',
             'ngFacebook',
             'ui.bootstrap',
             'Home',            
@@ -13,6 +14,7 @@
             'Location'
         ])
         .config(configFunc)
+        .factory('SessionService', SessionService)  
         .run(runFunc)
 
     configFunc.$inject = ['$stateProvider', '$urlRouterProvider', '$facebookProvider'];
@@ -61,23 +63,6 @@
             })
 
     }
-    runFunc.$inject = ['SessionService', '$rootScope'];
-    function runFunc(SessionService, $rootScope) {
-        console.log(SessionService.get('login')==null);
-        if (SessionService.get('login')==null){
-            $rootScope.isLogin = false;
-        }
-        else {
-            $rootScope.isLogin = true;
-        }
-    }
-
-})();
-(function(){
-    'use strict';
-    angular
-        .module('MyApp')
-        .factory('SessionService', SessionService);
 
     SessionService.$inject = ['$http'];
 
@@ -94,4 +79,34 @@
             }
         }
     }
+    
+    runFunc.$inject = ['SessionService', '$rootScope','$http'];
+    function runFunc(SessionService, $rootScope, $http) {
+        // $rootScope.Customer = {};
+        if (SessionService.get('login')==null){
+            $rootScope.isLogin  = false;
+        }
+        else {
+            $rootScope.isLogin = true;
+            
+            var req = {
+                method: 'GET',
+                url : 'http://localhost:2393/api/Customer/' + SessionService.get('login'),
+                headers: {
+                        'Content-Type': 'application/json'
+                }
+            }
+
+            $http(req).then(
+                function success(response) {
+                    // console.log(response);
+                    $rootScope.Customer = response.data;
+                },
+                function error(response) {
+                    console.log("error");
+                }
+            );            
+        }
+    }
+
 })();

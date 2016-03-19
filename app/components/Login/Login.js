@@ -24,18 +24,11 @@
         vm.isLogin           = $rootScope.isLogin;
         $scope.sessionLogin  = SessionService.get('login');
 
-        // $scope.$watch('sessionLogin', function(NewVal, OldVal){            
-        //     if (NewVal == null || OldVal == null){
-        //         vm.isLogin = true;
-        //     }
-        //     else{
-        //         vm.isLogin = false;
-        //     }
-        // });
+        console.log($rootScope.Customer);
 
         function Logout() {
             SessionService.destroy('login');
-            // vm.isLogin          = false;
+            vm.isLogin          = false;
             $rootScope.Customer = null;
             console.log(SessionService.get('login'));
         };
@@ -92,7 +85,7 @@
             function cancel() {
                 $uibModalInstance.dismiss('cancel');
             }
-
+    
             function checkEmail() {
                 var req = {
                     method: 'POST',
@@ -127,7 +120,7 @@
                 if (register.show == false && register.isconfirm == true) {
                     
                     var NewPerson = {
-                            CustomerID: register.ID,
+                            // CustomerID: register.ID,
                             Email: register.Email,
                             Password: register.Pass,
                             FullName: register.name,
@@ -137,8 +130,8 @@
                         // NewPerson = NewPerson.toJSON();
                     angular.toJson(NewPerson);
                     req = {
-                        method: 'PUT',
-                        url: 'http://localhost:2393/api/Customer/' + register.ID,
+                        method: 'POST',
+                        url: 'http://localhost:2393/api/Customer',
                         headers: {
                             'Content-Type': 'application/json'
                         },

@@ -53,9 +53,9 @@
         };
     }
 
-    ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams'];
+    ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams' ,'$rootScope'];
 
-    function ItemDetailController($scope, DataService, $uibModal, $stateParams) {
+    function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope) {
         var vm               = this;
         vm.Item              = {};
         vm.type              = $stateParams.type;
@@ -141,7 +141,7 @@
                     vm.Item.images = vm.Item.images.split(',');
                     vm.length = vm.Item.images.length;
                     // console.log(vm.Item);
-                    console.log(vm.Item);
+                    // console.log(vm.Item);
                 });
         }
 
@@ -238,33 +238,44 @@
 
         //sale product
         function sale(item) {
-            var modalInstance = $uibModal.open({
-                animation: vm.animationsEnabled,
-                templateUrl: 'components/item/detail/saleModal.html',
-                controller: SaleModalInstanceCtrl,
-                controllerAs: 'saleCtrl',
-                size: 'md',
-                resolve: {
-                    Item: function() {
-                        return item;
+            if ($rootScope.Customer != null){
+                var modalInstance = $uibModal.open({
+                    animation: vm.animationsEnabled,
+                    templateUrl: 'components/item/detail/saleModal.html',
+                    controller: SaleModalInstanceCtrl,
+                    controllerAs: 'vm',
+                    size: 'md',
+                    resolve: {
+                        Item: function() {
+                            return item;
+                        }
                     }
-                }
-            });
+                });
+            }
+            else {
+                var modalInstance = $uibModal.open({
+                    animation: vm.animationsEnabled,                
+                    controller: AlertController
+                }); 
+            }
+
         }
 
-        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window) {
-            var sale = this;
-            sale.name = "";
-            sale.address = "";
-            sale.phone = "";
-            sale.Email = "";
-            sale.Order = Order;
+        function AlertController($scope, $mdDialog, $mdMedia){
+            $scope.status = '  ';
+            $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+        }
 
-            sale.Item = Item;
-
-            sale.ok = OK;
-
-            sale.cancel = cancel;
+        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope) {
+            var sale     = this;
+            sale.name    = $rootScope.Customer.FullName;
+            sale.address = $rootScope.Customer.Address;
+            sale.phone   = $rootScope.Customer.SDT;
+            sale.Email   = $rootScope.Customer.Email;                       
+            sale.Order   = Order;           
+            sale.Item    = Item;          
+            sale.ok      = OK;        
+            sale.cancel  = cancel;            
 
             function OK() {
                 $uibModalInstance.close(sale.selected.item);
