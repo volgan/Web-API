@@ -5,7 +5,7 @@
             'ui.router',
             'ngMaterial',
             'ngMessages',
-            'material.svgAssetsCache',
+            // 'material.svgAssetsCache',
             'ngFacebook',
             'ui.bootstrap',
             'Home',            
@@ -101,6 +101,7 @@
                 function success(response) {
                     // console.log(response);
                     $rootScope.Customer = response.data;
+                    $rootScope.Cart     = [];
                 },
                 function error(response) {
                     console.log("error");

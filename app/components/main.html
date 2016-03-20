@@ -35,7 +35,7 @@
                     <div class="itemHidden" ng-style="vm.show[$index]">
                         <a href="#/Item/Phone/{{phone.PhoneID}}">
                             <h3>{{phone.Name | uppercase}}</h3>
-                            <strong class="price">{{phone.price}}</strong>
+                            <strong class="price">{{phone.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
                             <span><strong>Màn hình:</strong> {{phone.screenSize}}"</span>
                             <span><strong>HĐH:</strong> {{phone.OS}}</span>
@@ -66,6 +66,7 @@
                     <div class="itemHidden" ng-style="vm.show[$index+3]">
                         <a href="#/Item/Laptop/{{laptop.LaptopID}}">
                             <h3>{{laptop.Name | uppercase}}</h3>
+                            <strong class="price">{{laptop.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
                             <span style="display: block"><strong>Màn hình:</strong> {{laptop.screenResolution}}, {{laptop.screenSize}}" </span>
                             <span style="display: block"><strong>CPU:</strong> {{laptop.CPU_Tech}}</span>
@@ -96,6 +97,7 @@
                     <div class="itemHidden" ng-style="vm.show[$index+6]">
                         <a href="#/Item/Tablet/{{tablet.TabletID}}">
                             <h3>{{tablet.Name | uppercase}}</h3>
+                            <strong class="price">{{tablet.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
                             <span><strong>Màn hình:</strong> {{tablet.screenResolution}}, {{tablet.screenSize}}" </span>
                             <span><strong>HĐH:</strong> {{tablet.OS}} - <strong>CPU:</strong> {{tablet.CPU}}</span>

@@ -2,12 +2,12 @@
     <div class="row ROWTOP">
         <a href="#">Trang chủ</a>
         <span>></span>
-        <a href="#/Laptop">Laptop</a>
+        <a href="#/Item/{{vm.type}}">{{vm.type}}</a>
         <span>></span>
-        <a href="#/Laptop">{{vm.Item.manuf | uppercase}}</a>
+        <a href="#/Item/{{vm.type}}">{{vm.Item.manuf | uppercase}}</a>
     </div>
     <div class="row NAMEROW">
-        <h1 class="name">{{vm.Item.name}}</h1>
+        <h1 class="name">{{vm.Item.Name}}</h1>
     </div>
     <div class="row INFOROW">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">

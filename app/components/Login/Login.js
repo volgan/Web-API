@@ -14,7 +14,6 @@
         var vm               = this;
         vm.isOpen1           = false;
         vm.isOpen2           = false;
-        vm.Avatar            = "../images/User-Login.png";
         vm.Email             = "";
         vm.Name              = "";
         vm.Logout            = Logout;
@@ -79,8 +78,9 @@
             register.Address    = "";
             register.Phone      = "";
             register.checkEmail = checkEmail;
-            register.ErrorEmail = false;
+            register.ErrorEmail = false;            
             register.ID         = "";
+            register.showError  = false;
 
             function cancel() {
                 $uibModalInstance.dismiss('cancel');
@@ -104,13 +104,14 @@
                 if (register.Email.length != 0) {
                     $http(req).then(
                         function success(response) {
-                            register.ID = response.data.CustomerID;
-                            // $http.delete('http://localhost:2393/api/Customer'+(register.ID))
+                            register.ID         = response.data.CustomerID;                            
                             register.ErrorEmail = true;
+                            register.showError  = false;
                         },
                         function error(response) {
                             console.log("Error");
                             register.ErrorEmail = false;
+                            register.showError  = true;
                         }
                     );
                 }
@@ -142,6 +143,7 @@
                         function success(response) {
                             $rootScope.Customer = NewPerson;
                             vm.isLogin          = true;
+                            $rootScope.Cart     = [];
                             SessionService.set('login', response.data.CustomerID);
                             cancel();
                         },
@@ -205,8 +207,8 @@
                         function success(response) {
                             $rootScope.Customer = response.data;
                             vm.isLogin          = true;
-                            cancel();
-                            login.checkLogin = false;
+                            login.checkLogin    = false;
+                            $rootScope.Cart     = [];
                             cancel();
                             SessionService.set('login', response.data.CustomerID);
                         },

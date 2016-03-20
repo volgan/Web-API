@@ -19,7 +19,7 @@
 
         function getData() {
             // console.log($stateParams.type + " " + $stateParams.ID);
-            return $http.get('http://localhost:2393/api/' + $stateParams.type +'/' + $stateParams.ID)
+            return $http.get('http://localhost:2393/api/' + $stateParams.type + '/' + $stateParams.ID)
                 .success(getComplete);
         }
 
@@ -28,7 +28,7 @@
                 .success(getComplete);
         }
 
-        function getComplete(response) {            
+        function getComplete(response) {
             return response.data;
         }
     }
@@ -53,9 +53,10 @@
         };
     }
 
-    ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams' ,'$rootScope'];
+    ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams', '$rootScope',
+       '$window'];
 
-    function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope) {
+    function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope, $window) {
         var vm               = this;
         vm.Item              = {};
         vm.type              = $stateParams.type;
@@ -102,15 +103,15 @@
             return DataService.getphuKien()
                 .success(function(data) {
                     if (vm.type == "Phone") {
-                        for (var j = 0; j<data.length; j++){
+                        for (var j = 0; j < data.length; j++) {
                             searchPK(data[j], TypePK_phone);
                         }
                     } else if (vm.type == "Laptop") {
-                        for (var j = 0; j<data.length; j++){
+                        for (var j = 0; j < data.length; j++) {
                             searchPK(data[j], TypePK_laptop);
                         }
                     } else {
-                        for (var j = 0; j<data.length; j++){
+                        for (var j = 0; j < data.length; j++) {
                             searchPK(data[j], TypePK_tablet);
                         }
                     }
@@ -238,7 +239,7 @@
 
         //sale product
         function sale(item) {
-            if ($rootScope.Customer != null){
+            if ($rootScope.Customer != null) {
                 var modalInstance = $uibModal.open({
                     animation: vm.animationsEnabled,
                     templateUrl: 'components/item/detail/saleModal.html',
@@ -251,31 +252,36 @@
                         }
                     }
                 });
-            }
-            else {
-                var modalInstance = $uibModal.open({
-                    animation: vm.animationsEnabled,                
-                    controller: AlertController
-                }); 
+            } else {
+                // showAlert()
+                // function showAlert() {
+                //     alert = $mdDialog.alert()
+                //         .title('Attention, ' + $scope.userName)
+                //         .content('This is an example of how easy dialogs can be!')
+                //         .ok('Close');
+
+                //     $mdDialog
+                //         .show(alert)
+                //         .finally(function() {
+                //             alert = undefined;
+                //         });
+                // }
+                $window.alert("Bạn phải đăng nhập để mua hàng");
             }
 
         }
 
-        function AlertController($scope, $mdDialog, $mdMedia){
-            $scope.status = '  ';
-            $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-        }
-
-        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope) {
-            var sale     = this;
-            sale.name    = $rootScope.Customer.FullName;
-            sale.address = $rootScope.Customer.Address;
-            sale.phone   = $rootScope.Customer.SDT;
-            sale.Email   = $rootScope.Customer.Email;                       
-            sale.Order   = Order;           
-            sale.Item    = Item;          
-            sale.ok      = OK;        
-            sale.cancel  = cancel;            
+        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope, $http) {
+            var sale              = this;
+            sale.name             = $rootScope.Customer.FullName;
+            sale.address          = $rootScope.Customer.Address;
+            sale.phone            = $rootScope.Customer.SDT;
+            sale.Email            = $rootScope.Customer.Email;
+            sale.Order            = Order;
+            sale.Item             = vm.Item;
+            sale.ok               = OK;
+            sale.cancel           = cancel;
+            sale.ContinueShopping = ContinueShopping;
 
             function OK() {
                 $uibModalInstance.close(sale.selected.item);
@@ -285,8 +291,20 @@
                 $uibModalInstance.dismiss('cancel');
             }
 
-            function Order () {
-                $window.alert("Đặt hàng thành công. Đơn đặt hàng đã gửi đến bạn");
+            function Order() {
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:2393/api/Customer',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                }
+            }
+
+            function ContinueShopping(){
+                // console.log( $rootScope.Cart);
+                $rootScope.Cart.push(sale.Item);
+                console.log( $rootScope.Cart);
                 cancel();
             }
         }

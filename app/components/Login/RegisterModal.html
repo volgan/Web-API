@@ -18,7 +18,7 @@
                 <input type="email" id="email" name="email" ng-model="vm.Email" required autofocus="" ng-blur="vm.checkEmail()" />
                 <span ng-show="registerForm.email.$error.required && registerForm.email.$dirty"  style="color: red">required</span>
                 <span ng-show="!registerForm.email.$error.required && registerForm.email.$error.email && registerForm.email.$dirty" style="color:red">invalid email</span>
-                <span ng-hide="vm.ErrorEmail"  style="color: red">Email is existed</span>
+                <span ng-hide="!vm.showError"  style="color: red">Email is existed</span>
             </md-input-container>
 
             <md-input-container class="md-block">

@@ -17,7 +17,7 @@
                     <img ng-src="{{vm.Item.icon}}" alt="" height="200px">
                 </div>
                 <div class="row">
-                    <h4>{{vm.Item.name | uppercase}}</h4>
+                    <h4>{{vm.Item.Name | uppercase}}</h4>
                     <p class="price">{{vm.Item.price | currency:"":0 | comma2dot}} VNĐ</p>
                 </div>
             </div>
@@ -45,9 +45,9 @@
                             <span ng-show="SaleForm.email.$error.required && SaleForm.email.$dirty">required</span>
                             <span ng-show="!SaleForm.email.$error.required && SaleForm.email.$error.email && SaleForm.email.$dirty">invalid email</span>
                         </md-input-container>
-                        <div class="row">
+                        <div class="row" style="margin: 0">
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <button type="button" class="btn btn-warning" ng-click="">Tiếp tục</button>
+                                <button type="button" class="btn btn-warning" ng-click="vm.ContinueShopping()">Tiếp tục</button>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <button type="submit" class="btn btn-primary" ng-disabled="SaleForm.$invalid" ng-click="vm.Order()">Đặt hàng</button>

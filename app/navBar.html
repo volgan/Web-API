@@ -200,7 +200,7 @@
             </md-tooltip>
         </a>
     </li>
-    <li style="margin-right: 40px" ng-show="!vm.isLogin">
+    <li ng-show="!vm.isLogin">
         <a class="dropdown-toggle row" data-toggle="dropdown" href="#">
             <label class="col-lg-12 col-md-12 col-sm-3 col-xs-3 icon-menu">
                 <img src="images/User-Add.png" alt="" height="29px" ng-click="vm.register()">
@@ -210,10 +210,20 @@
             </md-tooltip>
         </a>
     </li>  
+    <li ng-show="vm.isLogin">
+        <a class="dropdown-toggle row" data-toggle="dropdown" href="#">
+            <label class="col-lg-12 col-md-12 col-sm-3 col-xs-3 icon-menu">
+                <img src="images/User.png" alt="" height="29px" ng-click="">
+            </label>
+            <md-tooltip md-direction="top">
+                Thông tin tài khoản
+            </md-tooltip>
+        </a>
+    </li>
     <li style="margin-right: 40px" ng-show="vm.isLogin">
         <a class="dropdown-toggle row" data-toggle="dropdown" href="#">
             <label class="col-lg-12 col-md-12 col-sm-3 col-xs-3 icon-menu">
-                <img src="images/{{vm.Avatar}}" alt="" height="29px" ng-click="vm.Logout()">
+                <img src="images/user-outline.png" alt="" height="29px" ng-click="vm.Logout()">
             </label>
             <md-tooltip md-direction="top">
                 Đăng xuất
