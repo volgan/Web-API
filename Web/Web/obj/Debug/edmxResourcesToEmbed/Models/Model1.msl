@@ -1,56 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WebServicesModelStoreContainer" CdmEntityContainer="WebServicesEntities1">
-    <EntitySetMapping Name="Laptops">
-      <EntityTypeMapping TypeName="WebServicesModel.Laptop">
-        <MappingFragment StoreEntitySet="Laptop">
-          <ScalarProperty Name="LaptopID" ColumnName="LaptopID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="icon" ColumnName="icon" />
-          <ScalarProperty Name="slide" ColumnName="slide" />
-          <ScalarProperty Name="images" ColumnName="images" />
-          <ScalarProperty Name="CPU_Manf" ColumnName="CPU_Manf" />
-          <ScalarProperty Name="CPU_Tech" ColumnName="CPU_Tech" />
-          <ScalarProperty Name="CPU_Type" ColumnName="CPU_Type" />
-          <ScalarProperty Name="CPU_Speed" ColumnName="CPU_Speed" />
-          <ScalarProperty Name="CPU_Cache" ColumnName="CPU_Cache" />
-          <ScalarProperty Name="CPU_MaxSpeed" ColumnName="CPU_MaxSpeed" />
-          <ScalarProperty Name="MainBoard_Chipset" ColumnName="MainBoard_Chipset" />
-          <ScalarProperty Name="MainBoard_Bus" ColumnName="MainBoard_Bus" />
-          <ScalarProperty Name="MainBoard_SupporRam" ColumnName="MainBoard_SupporRam" />
-          <ScalarProperty Name="Storage_Type" ColumnName="Storage_Type" />
-          <ScalarProperty Name="Storage_RAM" ColumnName="Storage_RAM" />
-          <ScalarProperty Name="Storage_Bus" ColumnName="Storage_Bus" />
-          <ScalarProperty Name="HardDisk_Type" ColumnName="HardDisk_Type" />
-          <ScalarProperty Name="HardDisk_Capacity" ColumnName="HardDisk_Capacity" />
-          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
-          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
-          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
-          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
-          <ScalarProperty Name="Graphics_Chipset" ColumnName="Graphics_Chipset" />
-          <ScalarProperty Name="Graphics_Capacity" ColumnName="Graphics_Capacity" />
-          <ScalarProperty Name="Graphics_Design" ColumnName="Graphics_Design" />
-          <ScalarProperty Name="Audio_Channels" ColumnName="Audio_Channels" />
-          <ScalarProperty Name="Audio_Other" ColumnName="Audio_Other" />
-          <ScalarProperty Name="CD" ColumnName="CD" />
-          <ScalarProperty Name="CD_Type" ColumnName="CD_Type" />
-          <ScalarProperty Name="Interfaces" ColumnName="Interfaces" />
-          <ScalarProperty Name="Interfaces_Other" ColumnName="Interfaces_Other" />
-          <ScalarProperty Name="LAN" ColumnName="LAN" />
-          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
-          <ScalarProperty Name="Network_Other" ColumnName="Network_Other" />
-          <ScalarProperty Name="CardReader_Support" ColumnName="CardReader_Support" />
-          <ScalarProperty Name="CardReader_Other" ColumnName="CardReader_Other" />
-          <ScalarProperty Name="Webcam_Resolution" ColumnName="Webcam_Resolution" />
-          <ScalarProperty Name="Webcam_Other" ColumnName="Webcam_Other" />
-          <ScalarProperty Name="Battery" ColumnName="Battery" />
-          <ScalarProperty Name="OS" ColumnName="OS" />
-          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
-          <ScalarProperty Name="weight" ColumnName="weight" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetails">
@@ -59,61 +9,6 @@
           <ScalarProperty Name="Prices" ColumnName="Prices" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Discount" ColumnName="Discount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Phones">
-      <EntityTypeMapping TypeName="WebServicesModel.Phone">
-        <MappingFragment StoreEntitySet="Phone">
-          <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="icon" ColumnName="icon" />
-          <ScalarProperty Name="slide" ColumnName="slide" />
-          <ScalarProperty Name="images" ColumnName="images" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="manuf" ColumnName="manuf" />
-          <ScalarProperty Name="descImg" ColumnName="descImg" />
-          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
-          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
-          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
-          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
-          <ScalarProperty Name="glassTouch" ColumnName="glassTouch" />
-          <ScalarProperty Name="CameraBehind_primary" ColumnName="CameraBehind_primary" />
-          <ScalarProperty Name="CameraBehind_film" ColumnName="CameraBehind_film" />
-          <ScalarProperty Name="CameraBehind_Flash" ColumnName="CameraBehind_Flash" />
-          <ScalarProperty Name="CameraBehind_Advanced" ColumnName="CameraBehind_Advanced" />
-          <ScalarProperty Name="CameraFront_primary" ColumnName="CameraFront_primary" />
-          <ScalarProperty Name="CameraFront_film" ColumnName="CameraFront_film" />
-          <ScalarProperty Name="CameraFront_VideoCall" ColumnName="CameraFront_VideoCall" />
-          <ScalarProperty Name="CameraFront_Other" ColumnName="CameraFront_Other" />
-          <ScalarProperty Name="OS" ColumnName="OS" />
-          <ScalarProperty Name="Chipset" ColumnName="Chipset" />
-          <ScalarProperty Name="NumCore" ColumnName="NumCore" />
-          <ScalarProperty Name="Speed" ColumnName="Speed" />
-          <ScalarProperty Name="GPU" ColumnName="GPU" />
-          <ScalarProperty Name="RAM" ColumnName="RAM" />
-          <ScalarProperty Name="ROM" ColumnName="ROM" />
-          <ScalarProperty Name="availability" ColumnName="availability" />
-          <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
-          <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
-          <ScalarProperty Name="TwoG" ColumnName="TwoG" />
-          <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
-          <ScalarProperty Name="FourG" ColumnName="FourG" />
-          <ScalarProperty Name="NumSIM" ColumnName="NumSIM" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
-          <ScalarProperty Name="GPS" ColumnName="GPS" />
-          <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
-          <ScalarProperty Name="NFC" ColumnName="NFC" />
-          <ScalarProperty Name="Charger" ColumnName="Charger" />
-          <ScalarProperty Name="audioJack" ColumnName="audioJack" />
-          <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
-          <ScalarProperty Name="Design_Type" ColumnName="Design_Type" />
-          <ScalarProperty Name="Material" ColumnName="Material" />
-          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
-          <ScalarProperty Name="weight" ColumnName="weight" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -136,52 +31,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Tablets">
-      <EntityTypeMapping TypeName="WebServicesModel.Tablet">
-        <MappingFragment StoreEntitySet="Tablet">
-          <ScalarProperty Name="TabletID" ColumnName="TabletID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="icon" ColumnName="icon" />
-          <ScalarProperty Name="slide" ColumnName="slide" />
-          <ScalarProperty Name="images" ColumnName="images" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="manuf" ColumnName="manuf" />
-          <ScalarProperty Name="descImg" ColumnName="descImg" />
-          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
-          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
-          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
-          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
-          <ScalarProperty Name="CameraBehind" ColumnName="CameraBehind" />
-          <ScalarProperty Name="film" ColumnName="film" />
-          <ScalarProperty Name="Advanced" ColumnName="Advanced" />
-          <ScalarProperty Name="CameraFront" ColumnName="CameraFront" />
-          <ScalarProperty Name="OS" ColumnName="OS" />
-          <ScalarProperty Name="Chipset" ColumnName="Chipset" />
-          <ScalarProperty Name="NumCore" ColumnName="NumCore" />
-          <ScalarProperty Name="Speed" ColumnName="Speed" />
-          <ScalarProperty Name="GPU" ColumnName="GPU" />
-          <ScalarProperty Name="RAM" ColumnName="RAM" />
-          <ScalarProperty Name="ROM" ColumnName="ROM" />
-          <ScalarProperty Name="availability" ColumnName="availability" />
-          <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
-          <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
-          <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
-          <ScalarProperty Name="FourG" ColumnName="FourG" />
-          <ScalarProperty Name="SIM" ColumnName="SIM" />
-          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
-          <ScalarProperty Name="GPS" ColumnName="GPS" />
-          <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
-          <ScalarProperty Name="USB" ColumnName="USB" />
-          <ScalarProperty Name="HDMI" ColumnName="HDMI" />
-          <ScalarProperty Name="audioJack" ColumnName="audioJack" />
-          <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
-          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
-          <ScalarProperty Name="weight" ColumnName="weight" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-          <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="WebServicesModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -201,6 +50,157 @@
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Laptops">
+      <EntityTypeMapping TypeName="WebServicesModel.Laptop">
+        <MappingFragment StoreEntitySet="Laptop">
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+          <ScalarProperty Name="OS" ColumnName="OS" />
+          <ScalarProperty Name="Battery" ColumnName="Battery" />
+          <ScalarProperty Name="Webcam_Other" ColumnName="Webcam_Other" />
+          <ScalarProperty Name="Webcam_Resolution" ColumnName="Webcam_Resolution" />
+          <ScalarProperty Name="CardReader_Other" ColumnName="CardReader_Other" />
+          <ScalarProperty Name="CardReader_Support" ColumnName="CardReader_Support" />
+          <ScalarProperty Name="Network_Other" ColumnName="Network_Other" />
+          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+          <ScalarProperty Name="LAN" ColumnName="LAN" />
+          <ScalarProperty Name="Interfaces_Other" ColumnName="Interfaces_Other" />
+          <ScalarProperty Name="Interfaces" ColumnName="Interfaces" />
+          <ScalarProperty Name="CD_Type" ColumnName="CD_Type" />
+          <ScalarProperty Name="CD" ColumnName="CD" />
+          <ScalarProperty Name="Audio_Other" ColumnName="Audio_Other" />
+          <ScalarProperty Name="Audio_Channels" ColumnName="Audio_Channels" />
+          <ScalarProperty Name="Graphics_Design" ColumnName="Graphics_Design" />
+          <ScalarProperty Name="Graphics_Capacity" ColumnName="Graphics_Capacity" />
+          <ScalarProperty Name="Graphics_Chipset" ColumnName="Graphics_Chipset" />
+          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+          <ScalarProperty Name="HardDisk_Capacity" ColumnName="HardDisk_Capacity" />
+          <ScalarProperty Name="HardDisk_Type" ColumnName="HardDisk_Type" />
+          <ScalarProperty Name="Storage_Bus" ColumnName="Storage_Bus" />
+          <ScalarProperty Name="Storage_RAM" ColumnName="Storage_RAM" />
+          <ScalarProperty Name="Storage_Type" ColumnName="Storage_Type" />
+          <ScalarProperty Name="MainBoard_SupporRam" ColumnName="MainBoard_SupporRam" />
+          <ScalarProperty Name="MainBoard_Bus" ColumnName="MainBoard_Bus" />
+          <ScalarProperty Name="MainBoard_Chipset" ColumnName="MainBoard_Chipset" />
+          <ScalarProperty Name="CPU_MaxSpeed" ColumnName="CPU_MaxSpeed" />
+          <ScalarProperty Name="CPU_Cache" ColumnName="CPU_Cache" />
+          <ScalarProperty Name="CPU_Speed" ColumnName="CPU_Speed" />
+          <ScalarProperty Name="CPU_Type" ColumnName="CPU_Type" />
+          <ScalarProperty Name="CPU_Tech" ColumnName="CPU_Tech" />
+          <ScalarProperty Name="CPU_Manf" ColumnName="CPU_Manf" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="slide" ColumnName="slide" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Phones">
+      <EntityTypeMapping TypeName="WebServicesModel.Phone">
+        <MappingFragment StoreEntitySet="Phone">
+          <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+          <ScalarProperty Name="Material" ColumnName="Material" />
+          <ScalarProperty Name="Design_Type" ColumnName="Design_Type" />
+          <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
+          <ScalarProperty Name="audioJack" ColumnName="audioJack" />
+          <ScalarProperty Name="Charger" ColumnName="Charger" />
+          <ScalarProperty Name="NFC" ColumnName="NFC" />
+          <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
+          <ScalarProperty Name="GPS" ColumnName="GPS" />
+          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="NumSIM" ColumnName="NumSIM" />
+          <ScalarProperty Name="FourG" ColumnName="FourG" />
+          <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
+          <ScalarProperty Name="TwoG" ColumnName="TwoG" />
+          <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
+          <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
+          <ScalarProperty Name="availability" ColumnName="availability" />
+          <ScalarProperty Name="ROM" ColumnName="ROM" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="GPU" ColumnName="GPU" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="NumCore" ColumnName="NumCore" />
+          <ScalarProperty Name="Chipset" ColumnName="Chipset" />
+          <ScalarProperty Name="OS" ColumnName="OS" />
+          <ScalarProperty Name="CameraFront_Other" ColumnName="CameraFront_Other" />
+          <ScalarProperty Name="CameraFront_VideoCall" ColumnName="CameraFront_VideoCall" />
+          <ScalarProperty Name="CameraFront_film" ColumnName="CameraFront_film" />
+          <ScalarProperty Name="CameraFront_primary" ColumnName="CameraFront_primary" />
+          <ScalarProperty Name="CameraBehind_Advanced" ColumnName="CameraBehind_Advanced" />
+          <ScalarProperty Name="CameraBehind_Flash" ColumnName="CameraBehind_Flash" />
+          <ScalarProperty Name="CameraBehind_film" ColumnName="CameraBehind_film" />
+          <ScalarProperty Name="CameraBehind_primary" ColumnName="CameraBehind_primary" />
+          <ScalarProperty Name="glassTouch" ColumnName="glassTouch" />
+          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+          <ScalarProperty Name="descImg" ColumnName="descImg" />
+          <ScalarProperty Name="manuf" ColumnName="manuf" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="slide" ColumnName="slide" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tablets">
+      <EntityTypeMapping TypeName="WebServicesModel.Tablet">
+        <MappingFragment StoreEntitySet="Tablet">
+          <ScalarProperty Name="Battery_Type" ColumnName="Battery_Type" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="weight" ColumnName="weight" />
+          <ScalarProperty Name="dimensions" ColumnName="dimensions" />
+          <ScalarProperty Name="Connection_Other" ColumnName="Connection_Other" />
+          <ScalarProperty Name="audioJack" ColumnName="audioJack" />
+          <ScalarProperty Name="HDMI" ColumnName="HDMI" />
+          <ScalarProperty Name="USB" ColumnName="USB" />
+          <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
+          <ScalarProperty Name="GPS" ColumnName="GPS" />
+          <ScalarProperty Name="Wifi" ColumnName="Wifi" />
+          <ScalarProperty Name="SIM" ColumnName="SIM" />
+          <ScalarProperty Name="FourG" ColumnName="FourG" />
+          <ScalarProperty Name="ThreeG" ColumnName="ThreeG" />
+          <ScalarProperty Name="MaximumSupport" ColumnName="MaximumSupport" />
+          <ScalarProperty Name="memoryCard" ColumnName="memoryCard" />
+          <ScalarProperty Name="availability" ColumnName="availability" />
+          <ScalarProperty Name="ROM" ColumnName="ROM" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="GPU" ColumnName="GPU" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="NumCore" ColumnName="NumCore" />
+          <ScalarProperty Name="Chipset" ColumnName="Chipset" />
+          <ScalarProperty Name="OS" ColumnName="OS" />
+          <ScalarProperty Name="CameraFront" ColumnName="CameraFront" />
+          <ScalarProperty Name="Advanced" ColumnName="Advanced" />
+          <ScalarProperty Name="film" ColumnName="film" />
+          <ScalarProperty Name="CameraBehind" ColumnName="CameraBehind" />
+          <ScalarProperty Name="touchScreen" ColumnName="touchScreen" />
+          <ScalarProperty Name="screenSize" ColumnName="screenSize" />
+          <ScalarProperty Name="screenResolution" ColumnName="screenResolution" />
+          <ScalarProperty Name="screenTech" ColumnName="screenTech" />
+          <ScalarProperty Name="descImg" ColumnName="descImg" />
+          <ScalarProperty Name="manuf" ColumnName="manuf" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="slide" ColumnName="slide" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

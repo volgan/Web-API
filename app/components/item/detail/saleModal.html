@@ -23,7 +23,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <md-content>
-                    <form name="SaleForm">
+                    <form name="SaleForm" class="Order">
                         <md-input-container class="md-block">
                             <label for="name">Họ tên người nhận</label>
                             <input type="text" id="name" name="name" ng-model="vm.name" required/>
@@ -43,16 +43,27 @@
                             <label for="email">Email để nhận thông tin</label>
                             <input type="email" id="email" name="email" ng-model="vm.Email" required/>
                             <span ng-show="SaleForm.email.$error.required && SaleForm.email.$dirty">required</span>
-                            <span ng-show="!SaleForm.email.$error.required && SaleForm.email.$error.email && SaleForm.email.$dirty">invalid email</span>
+                            <span ng-show="!SaleForm.email.$error.required && SaleForm.email.$error.emai&& SaleForm.email.$dirty">invalid email</span>
                         </md-input-container>
-                        <div class="row" style="margin: 0">
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <button type="button" class="btn btn-warning" ng-click="vm.ContinueShopping()">Tiếp tục</button>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label for="Quantity">Số lượng</label>
+                                <input type="number" name="Quantity" id="Quantity" placeholder="" max="5" min="1" required ng-model="vm.Quantity"/>
+                                <span ng-show="SaleForm.Quantity.$error.required && SaleForm.Quantity.$dirty" style="color:red">required</span>
+                                <span ng-show="SaleForm.Quantity.$error.required && SaleForm.Quantity.$dirty" style="color:red">required</span>
+                            </md-input-container>
+                            <div flex="5" hide-xs hide-sm>
+                              <!-- Spacer //-->
                             </div>
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <button type="submit" class="btn btn-primary" ng-disabled="SaleForm.$invalid" ng-click="vm.Order()">Đặt hàng</button>
-                            </div>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label for="RequiredDate">Ngày nhận hàng</label>
+                                <input type="date" name="RequiredDate" id="RequiredDate" ng-model="vm.RequiredDate" min="{{vm.RequiredDate}}" max="{{vm.maxDate}}" required="required" title="">
+                                <span ng-show="SaleForm.RequiredDate.$error.required && SaleForm.RequiredDate.$dirty" style="color:red">required</span>
+                            </md-input-container>   
                         </div>
+                        <md-input-container class="md-block">
+                            <md-button class="md-warn md-raised md-hue-2" ng-click="vm.Order()" ng-disabled="SaleForm.$invalid" style="color: white; text-">Đặt hàng</md-button>
+                        </md-input-container>
                     </form>
                 </md-content>
             </div>

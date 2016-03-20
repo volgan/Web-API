@@ -9,7 +9,6 @@
 
 namespace Web.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -22,11 +21,10 @@ namespace Web.Models
     
         public int OrderID { get; set; }
         public long CustomerID { get; set; }
-        public System.DateTime OrderDate { get; set; }
-        public System.DateTime RequriedDate { get; set; }
-        [JsonIgnore]
+        public string OrderDate { get; set; }
+        public string RequriedDate { get; set; }
+    
         public virtual Customer Customer { get; set; }
-        [JsonIgnore]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

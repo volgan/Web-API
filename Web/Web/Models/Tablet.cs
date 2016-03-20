@@ -14,7 +14,7 @@ namespace Web.Models
     
     public partial class Tablet
     {
-        public string TabletID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public string icon { get; set; }
         public string slide { get; set; }

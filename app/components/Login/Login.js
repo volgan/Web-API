@@ -23,13 +23,11 @@
         vm.isLogin           = $rootScope.isLogin;
         $scope.sessionLogin  = SessionService.get('login');
 
-        console.log($rootScope.Customer);
 
         function Logout() {
             SessionService.destroy('login');
             vm.isLogin          = false;
             $rootScope.Customer = null;
-            console.log(SessionService.get('login'));
         };
 
         function register() {

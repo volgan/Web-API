@@ -28,12 +28,12 @@
                 </md-grid-tile>
                 <md-grid-tile ng-mouseleave="vm.showPhoneImage($index)" class="white" ng-repeat="phone in vm.phones | limitTo:3" md-colspan-gt-md="2" md-colspan="1" md-rowspan="2" md-rowspan-sm="1">
                     <div ng-style="vm.hide[$index]" ng-mouseenter="vm.hidePhoneImage($index)">
-                        <a class="phoneDetail" href="#/Phone/{{phone.PhoneID}">
+                        <a class="phoneDetail" href="#/Phone/{{phone.ID}">
                             <img ng-src="{{phone.icon}}" style="height: 250px; width:250px">
                         </a>
                     </div>
                     <div class="itemHidden" ng-style="vm.show[$index]">
-                        <a href="#/Item/Phone/{{phone.PhoneID}}">
+                        <a href="#/Item/Phone/{{phone.ID}}">
                             <h3>{{phone.Name | uppercase}}</h3>
                             <strong class="price">{{phone.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
@@ -45,7 +45,7 @@
                         </a>
                     </div>
                     <md-grid-tile-footer class="phoneFooter" ng-mouseenter="vm.showPhoneImage($index)">
-                        <a href="#/Item/Phone/{{phone.PhoneID}}">
+                        <a href="#/Item/Phone/{{phone.ID}}">
                             <button class="button button--aylen button--round-l button--text-thick">MUA NGAY</button>
                         </a>
                         <h3>{{phone.Name | uppercase}}</h3>
@@ -59,12 +59,12 @@
                 </md-grid-tile>
                 <md-grid-tile ng-mouseleave="vm.showPhoneImage($index+3)" class="white" ng-repeat="laptop in vm.Laptops | limitTo:3" md-colspan-gt-md="2" md-colspan="1" md-rowspan="2" md-rowspan-sm="1">
                     <div ng-style="vm.hide[$index+3]" ng-mouseenter="vm.hidePhoneImage($index+3)">
-                        <a class="phoneDetail" href="#/Laptop/{{laptop.LaptopID}}">
+                        <a class="phoneDetail" href="#/Laptop/{{laptop.ID}}">
                             <img style="height: 250px" ng-src="{{laptop.icon}}">
                         </a>
                     </div>
                     <div class="itemHidden" ng-style="vm.show[$index+3]">
-                        <a href="#/Item/Laptop/{{laptop.LaptopID}}">
+                        <a href="#/Item/Laptop/{{laptop.ID}}">
                             <h3>{{laptop.Name | uppercase}}</h3>
                             <strong class="price">{{laptop.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
@@ -76,7 +76,7 @@
                         </a>
                     </div>
                     <md-grid-tile-footer class="phoneFooter" ng-mouseenter="vm.showPhoneImage($index+3)">
-                        <a href="#/Item/Laptop/{{laptop.LaptopID}}">
+                        <a href="#/Item/Laptop/{{laptop.ID}}">
                             <button class="button button--aylen button--round-l button--text-thick">MUA NGAY</button>
                         </a>
                         <h3>{{laptop.Name | uppercase}}</h3>
@@ -90,12 +90,12 @@
                 </md-grid-tile>
                 <md-grid-tile ng-mouseleave="vm.showPhoneImage($index+6)" class="white" ng-repeat="tablet in vm.tablets | limitTo:3" md-colspan-gt-md="2" md-colspan="1" md-rowspan="2" md-rowspan-sm="1">
                     <div ng-style="vm.hide[$index+6]" ng-mouseenter="vm.hidePhoneImage($index+6)">
-                        <a class="phoneDetail" href="#/Tablet/{{tablet.TabletID}}">
+                        <a class="phoneDetail" href="#/Tablet/{{tablet.ID}}">
                             <img style="height: 250px" ng-src="{{tablet.icon}}">
                         </a>
                     </div>
                     <div class="itemHidden" ng-style="vm.show[$index+6]">
-                        <a href="#/Item/Tablet/{{tablet.TabletID}}">
+                        <a href="#/Item/Tablet/{{tablet.ID}}">
                             <h3>{{tablet.Name | uppercase}}</h3>
                             <strong class="price">{{tablet.price | currency:"":0 | comma2dot}} VNĐ</strong>
                             <div></div>
@@ -107,7 +107,7 @@
                         </a>
                     </div>
                     <md-grid-tile-footer class="phoneFooter" ng-mouseenter="vm.showPhoneImage($index+6)">
-                        <a href="#/Item/Tablet/{{tablet.TabletID}}">
+                        <a href="#/Item/Tablet/{{tablet.ID}}">
                             <button class="button button--aylen button--round-l button--text-thick">MUA NGAY</button>
                         </a>
                         <h3>{{tablet.Name | uppercase}}</h3>

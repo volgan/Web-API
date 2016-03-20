@@ -13,6 +13,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OrderDetailController : ApiController
     {
         private WebContext db = new WebContext();
@@ -27,13 +28,30 @@ namespace Web.Controllers
         [ResponseType(typeof(OrderDetail))]
         public async Task<IHttpActionResult> GetOrderDetail(int id)
         {
-            OrderDetail orderdetail = await db.OrderDetails.FindAsync(id);
-            if (orderdetail == null)
+
+            //OrderDetail orderdetail = await db.OrderDetails.FindAsync(id);
+
+            //if (orderdetail == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return Ok(orderdetail);
+            OrderDetail[] orderdetail;
+            var query = (from orderDetail in db.OrderDetails
+                         where orderDetail.OrderID.Equals(id)
+                         select orderDetail).ToArray();
+            if (query.Length > 0)
             {
-                return NotFound();
+                orderdetail = new OrderDetail[query.Length];
+                for (int i = 0; i < query.Length; i++)
+                {
+                    orderdetail[i] = query[i];
+                }
+                return Ok(orderdetail);
             }
 
-            return Ok(orderdetail);
+            return NotFound();
         }
 
         // PUT api/OrderDetail/5

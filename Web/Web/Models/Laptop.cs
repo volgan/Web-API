@@ -14,7 +14,7 @@ namespace Web.Models
     
     public partial class Laptop
     {
-        public string LaptopID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
         public long price { get; set; }
         public string icon { get; set; }

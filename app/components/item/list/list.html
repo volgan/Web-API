@@ -4,16 +4,16 @@
            
             <div ng-style ="hide" ng-mouseover="show={display: 'block'}; hide={display: 'none'}">
                 <p class="imgItem">
-                    <a href="#/Item/Phone/{{phone.PhoneID}}">
+                    <a href="#/Item/Phone/{{phone.ID}}">
                         <img src="{{phone.icon}}" alt="{{phone.Name}}" height="120px" height="120px">
                     </a>
                 </p>
-                <p class="name"><a href="#/Item/Phone/{{phone.PhoneID}}">{{phone.Name | uppercase}}</a></p>
+                <p class="name"><a href="#/Item/Phone/{{phone.ID}}">{{phone.Name | uppercase}}</a></p>
                 <p class="price">{{phone.price| currency:"":0 | comma2dot}} VNĐ</p>
             </div>      
 
             <div class="itemHidden" ng-style="show">
-            	<a href="#/Item/Phone/{{phone.PhoneID}}">
+            	<a href="#/Item/Phone/{{phone.ID}}">
 	            	<h3>{{phone.Name | uppercase}}</h3>
 	            	<strong class="price">{{phone.price}}</strong>
 	            	<div></div>
@@ -31,11 +31,11 @@
     <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 itemTab" ng-repeat="laptop in vm.Items | orderBy: vm.price" ng-mouseleave= "show={display: 'none'}; hide={display: 'block'}">
             <p class="imgItem">
-                <a href="#/Item/Laptop/{{laptop.LaptopID}}">
+                <a href="#/Item/Laptop/{{laptop.ID}}">
                     <img src="{{laptop.icon}}" alt="{{laptop.Name}}" height="180px" height="180px">
-                </a>
+                </a>                
             </p>
-            <p class="name"><a href="#/Item/Laptop/{{laptop.LaptopID}}">{{laptop.Name | uppercase}}</a></p>
+            <p class="name"><a href="#/Item/Laptop/{{laptop.ID}}">{{laptop.Name | uppercase}}</a></p>
             <p class="price">{{laptop.price| currency:"":0 | comma2dot}} VNĐ</p>
             <p><strong>Màn hình:</strong>{{laptop.screenResolution}}, {{laptop.screenSize}}" </p>
             <p><strong>CPU:</strong> {{laptop.CPU_Tech}}</p>
@@ -49,11 +49,11 @@
     <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 itemTab" ng-repeat="tablet in vm.Items | orderBy: vm.price">
             <p class="imgItem">
-                <a href="#/Item/Tablet/{{tablet.TabletID}}">
+                <a href="#/Item/Tablet/{{tablet.ID}}">
                     <img src="{{tablet.icon}}" alt="{{tablet.Name}}" height="180px" height="180px">
                 </a>
             </p>
-            <p class="name"><a href="#/Item/Tablet/{{tablet.TabletID}}">{{tablet.Name | uppercase}}</a></p>
+            <p class="name"><a href="#/Item/Tablet/{{tablet.ID}}">{{tablet.Name | uppercase}}</a></p>
             <p class="price">{{tablet.price | currency:"":0 | comma2dot}} VNĐ</p>
             <span><strong>Màn hình:</strong> {{tablet.screenResolution}}, {{tablet.screenSize}}" </span>
             <span><strong>HĐH:</strong> {{tablet.OS}} - <strong>CPU:</strong> {{tablet.Chipset}}</span>

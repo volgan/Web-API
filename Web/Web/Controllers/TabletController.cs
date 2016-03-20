@@ -13,7 +13,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-     [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TabletController : ApiController
     {
         private WebContext db = new WebContext();
@@ -45,7 +45,7 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != tablet.TabletID)
+            if (id != tablet.ID)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (TabletExists(tablet.TabletID))
+                if (TabletExists(tablet.ID))
                 {
                     return Conflict();
                 }
@@ -98,7 +98,7 @@ namespace Web.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = tablet.TabletID }, tablet);
+            return CreatedAtRoute("DefaultApi", new { id = tablet.ID }, tablet);
         }
 
         // DELETE api/Tablet/5
@@ -128,7 +128,7 @@ namespace Web.Controllers
 
         private bool TabletExists(string id)
         {
-            return db.Tablets.Count(e => e.TabletID == id) > 0;
+            return db.Tablets.Count(e => e.ID == id) > 0;
         }
     }
 }

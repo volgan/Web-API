@@ -28,6 +28,19 @@
     font-weight: bold;
     line-height: 1.3em;
 }
+.ItemDetail .INFOROW{
+    height: 396px;
+    width: 1170px;
+}
+.ItemDetail .INFOROW .ICONBLOCK {
+    height: 396px;
+    /*border: 1px solid #ddd;*/
+}
+
+.ItemDetail .INFOROW .INFOBLOCK {
+    height: 396px;
+    /*border: 1px solid #ddd;*/
+}
 
 .ItemDetail .INFOROW .price {
     display: block;
@@ -300,4 +313,29 @@
     font-weight: 600;
     line-height: 1.3em;
     padding: 8px;
+}
+md-input-container{
+    margin: 10px 0;
+}
+.modal-body .Order span{
+    color: white;
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+.ListCart{
+    padding-left: 0;
+    margin-bottom: 20px;    
+}
+.ListItemCart{
+    position: relative;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 0;
+    width: 98%;
+}
+.CARTBLOCK{
+    height: 396px;
+    border: 1px solid #ddd;
 }

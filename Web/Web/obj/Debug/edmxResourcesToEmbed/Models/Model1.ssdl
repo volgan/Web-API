@@ -13,9 +13,9 @@
   </EntityType>
   <EntityType Name="Laptop">
     <Key>
-      <PropertyRef Name="LaptopID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="LaptopID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="price" Type="bigint" Nullable="false" />
     <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
@@ -75,16 +75,16 @@
     <Key>
       <PropertyRef Name="OrderID" />
     </Key>
-    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CustomerID" Type="bigint" Nullable="false" />
-    <Property Name="OrderDate" Type="datetime" Nullable="false" />
-    <Property Name="RequriedDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderDate" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RequriedDate" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Phone">
     <Key>
-      <PropertyRef Name="PhoneID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="PhoneID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
     <Property Name="slide" Type="nvarchar(max)" Nullable="false" />
@@ -153,9 +153,9 @@
   </EntityType>
   <EntityType Name="Tablet">
     <Key>
-      <PropertyRef Name="TabletID" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="TabletID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="icon" Type="nvarchar(max)" Nullable="false" />
     <Property Name="slide" Type="nvarchar(max)" Nullable="false" />

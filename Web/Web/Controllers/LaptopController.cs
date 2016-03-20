@@ -13,7 +13,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-     [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LaptopController : ApiController
     {
         private WebContext db = new WebContext();
@@ -21,7 +21,6 @@ namespace Web.Controllers
         // GET api/Laptop
         public IQueryable<Laptop> GetLaptops()
         {
-            var laptops = db.Laptops.ToList();
             return db.Laptops;
         }
 
@@ -46,7 +45,7 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != laptop.LaptopID)
+            if (id != laptop.ID)
             {
                 return BadRequest();
             }
@@ -89,7 +88,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (LaptopExists(laptop.LaptopID))
+                if (LaptopExists(laptop.ID))
                 {
                     return Conflict();
                 }
@@ -99,7 +98,7 @@ namespace Web.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = laptop.LaptopID }, laptop);
+            return CreatedAtRoute("DefaultApi", new { id = laptop.ID }, laptop);
         }
 
         // DELETE api/Laptop/5
@@ -129,7 +128,7 @@ namespace Web.Controllers
 
         private bool LaptopExists(string id)
         {
-            return db.Laptops.Count(e => e.LaptopID == id) > 0;
+            return db.Laptops.Count(e => e.ID == id) > 0;
         }
     }
 }

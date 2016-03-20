@@ -13,7 +13,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-     [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PhoneController : ApiController
     {
         private WebContext db = new WebContext();
@@ -45,7 +45,7 @@ namespace Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != phone.PhoneID)
+            if (id != phone.ID)
             {
                 return BadRequest();
             }
@@ -88,7 +88,7 @@ namespace Web.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PhoneExists(phone.PhoneID))
+                if (PhoneExists(phone.ID))
                 {
                     return Conflict();
                 }
@@ -98,7 +98,7 @@ namespace Web.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = phone.PhoneID }, phone);
+            return CreatedAtRoute("DefaultApi", new { id = phone.ID }, phone);
         }
 
         // DELETE api/Phone/5
@@ -128,7 +128,7 @@ namespace Web.Controllers
 
         private bool PhoneExists(string id)
         {
-            return db.Phones.Count(e => e.PhoneID == id) > 0;
+            return db.Phones.Count(e => e.ID == id) > 0;
         }
     }
 }

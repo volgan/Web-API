@@ -15,6 +15,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CustomerController : ApiController
     {
         private WebContext db = new WebContext();
@@ -76,6 +77,7 @@ namespace Web.Controllers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> PostCustomer(Customer customer)
         {
+            //int type = 0;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -99,9 +101,23 @@ namespace Web.Controllers
             }
             else
             {
-                customer.Password = getSHA256Hash(customer.Password);
-                db.Customers.Add(customer);
-                await db.SaveChangesAsync();
+                if (customer.Address.Length == 0 && customer.FullName.Length == 0 && customer.SDT.Length == 0)
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    if (customer.Password.Equals("null"))
+                    {
+                        return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
+                    }
+                    else
+                    {
+                        customer.Password = getSHA256Hash(customer.Password);
+                        db.Customers.Add(customer);
+                        await db.SaveChangesAsync();
+                    }
+                }
             }
 
             return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);

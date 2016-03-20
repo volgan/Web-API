@@ -18,7 +18,6 @@
         }
 
         function getData() {
-            // console.log($stateParams.type + " " + $stateParams.ID);
             return $http.get('http://localhost:2393/api/' + $stateParams.type + '/' + $stateParams.ID)
                 .success(getComplete);
         }
@@ -54,7 +53,8 @@
     }
 
     ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams', '$rootScope',
-       '$window'];
+        '$window'
+    ];
 
     function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope, $window) {
         var vm               = this;
@@ -71,6 +71,9 @@
         vm.prev              = PREV;
         vm.selectIMG         = selectIMG;
         
+        vm.AddToCart         = AddToCart;
+        vm.RemoveFromCart    = RemoveFromCart;
+        
         vm.cmts              = [];
         vm.replies           = [];
         
@@ -86,6 +89,8 @@
         };
         vm.rep;
         vm.cmt;
+
+
 
         //Get Phu Kien        
         var TypePK_laptop = ['tai nghe', 'chuột', 'bàn phím', 'usb', 'loa', 'adapter'];
@@ -237,6 +242,20 @@
             vm.index = indexIMG;
         }
 
+        function AddToCart(item) {
+            if ($rootScope.Customer != null) {
+                $rootScope.Cart.push(item);
+                // vm.Cart = $rootScope.Cart;
+                // console.log( $rootScope.Cart);
+            } else {
+                $window.alert("Bạn phải đăng nhập để mua hàng");
+            }
+        }
+
+        function RemoveFromCart(index) {
+
+        }
+
         //sale product
         function sale(item) {
             if ($rootScope.Customer != null) {
@@ -253,35 +272,35 @@
                     }
                 });
             } else {
-                // showAlert()
-                // function showAlert() {
-                //     alert = $mdDialog.alert()
-                //         .title('Attention, ' + $scope.userName)
-                //         .content('This is an example of how easy dialogs can be!')
-                //         .ok('Close');
-
-                //     $mdDialog
-                //         .show(alert)
-                //         .finally(function() {
-                //             alert = undefined;
-                //         });
-                // }
                 $window.alert("Bạn phải đăng nhập để mua hàng");
             }
 
         }
 
-        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope, $http) {
-            var sale              = this;
-            sale.name             = $rootScope.Customer.FullName;
-            sale.address          = $rootScope.Customer.Address;
-            sale.phone            = $rootScope.Customer.SDT;
-            sale.Email            = $rootScope.Customer.Email;
-            sale.Order            = Order;
-            sale.Item             = vm.Item;
-            sale.ok               = OK;
-            sale.cancel           = cancel;
-            sale.ContinueShopping = ContinueShopping;
+        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope, $http) 
+        {
+            var sale         = this;
+            sale.name        = $rootScope.Customer.FullName;
+            sale.address     = $rootScope.Customer.Address;
+            sale.phone       = $rootScope.Customer.SDT;
+            sale.Email       = $rootScope.Customer.Email;
+            sale.Quantity    = 1;       
+            sale.Order       = Order;
+            sale.Item        = vm.Item;
+            sale.ok          = OK;
+            sale.cancel      = cancel;
+            sale.CurrentDate = new Date();
+
+            sale.RequiredDate = new Date(
+                sale.CurrentDate.getFullYear(),
+                sale.CurrentDate.getMonth(),
+                sale.CurrentDate.getDate()+1);
+
+            sale.maxDate = new Date(
+                sale.CurrentDate.getFullYear(),
+                sale.CurrentDate.getMonth(),
+                sale.CurrentDate.getDate()+4);
+            // sale.ContinueShopping = ContinueShopping;
 
             function OK() {
                 $uibModalInstance.close(sale.selected.item);
@@ -292,20 +311,15 @@
             }
 
             function Order() {
-                var req = {
-                    method: 'POST',
-                    url: 'http://localhost:2393/api/Customer',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                }
-            }
-
-            function ContinueShopping(){
-                // console.log( $rootScope.Cart);
-                $rootScope.Cart.push(sale.Item);
-                console.log( $rootScope.Cart);
-                cancel();
+                // var req = {
+                //     method: 'POST',
+                //     url: 'http://localhost:2393/api/Order',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     data
+                // }
+                console.log("Đang xử lý");
             }
         }
     }

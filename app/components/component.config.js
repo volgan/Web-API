@@ -20,6 +20,9 @@
     configFunc.$inject = ['$stateProvider', '$urlRouterProvider', '$facebookProvider'];
 
     function configFunc($stateProvider, $urlRouterProvider, $facebookProvider) {
+        // $rootScope.Cart = [];
+        console.log("Config function");
+
         $facebookProvider.setAppId('1514033005563978');
 
         $urlRouterProvider.otherwise("/");
@@ -82,7 +85,7 @@
     
     runFunc.$inject = ['SessionService', '$rootScope','$http'];
     function runFunc(SessionService, $rootScope, $http) {
-        // $rootScope.Customer = {};
+        console.log("Run function");
         if (SessionService.get('login')==null){
             $rootScope.isLogin  = false;
         }
