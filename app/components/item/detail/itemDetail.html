@@ -13,12 +13,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ICONBLOCK">
         	<div class="row ICON">
             	<img src="{{vm.Item.icon}}" alt="" height="300px">
-            </div>
-            <div class="row">
-            	<md-content class="content">
-					<md-button class="md-raised md-primary" ng-click="vm.sale(vm.Item)"><strong>MUA NGAY<strong></md-button>
-            	</md-content>
-            </div>
+            </div>            
             <div class="row">
             	<md-content>
 					<md-button class="md-raised md-warn" ng-click="vm.AddToCart(vm.Item)"><strong>Thêm vào giỏ hàng<strong></md-button>
@@ -79,31 +74,40 @@
                 </li>
             </ul>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 CARTBLOCK">
-            <div class="modal-header">
-                <md-toolbar>
-                    <h4 style="color: white; font-weight: bold">SẢN PHẨM TRONG GIỎ HÀNG</h4>
-                </md-toolbar>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">        
+            <div class="row ">
+               <div class="CARTBLOCK">
+                    <div class="modal-header">
+                        <md-toolbar>
+                            <h4 style="color: white; font-weight: bold">SẢN PHẨM TRONG GIỎ HÀNG</h4>
+                        </md-toolbar>
+                    </div>
+                    <div class="modal-body cart"  style="padding: 0" ng-show ="Cart.length > 0">
+                       <ul class="ListCart">
+                           <li class="ListItemCart row" ng-repeat="item in Cart">                        
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <img src="{{item.icon}}" alt="" class="IconCart" height="50px">
+                                </div>
+                                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
+                                    <a href="#/Item/{{vm.type}}/{{item.ID}}">{{item.Name}}</a>
+                                    <p class="price" style="font-size:15px">{{item.price| currency:"":0 | comma2dot}} VNĐ</p>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                    <button type="button" class="btn btn-link" ng-click="vm.RemoveFromCart($index)">x</button>
+                                </div>
+                           </li>
+                       </ul>                       
+                    </div>
+                    <div ng-show ="(Cart.length == 0) || (Cart == null)">
+                        <p class="price">Không có sản phẩm trong giỏ hàng</p>
+                    </div>
+               </div>                
             </div>
-           <div class="modal-body cart"  style="overflow-y: scroll; padding: 0" ng-show ="Cart.length > 0">
-               <ul class="ListCart">
-                   <li class="ListItemCart row" ng-repeat="item in Cart">                        
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <img src="{{item.icon}}" alt="" class="IconCart" height="50px">
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
-                            <a href="#/Item/{{vm.type}}/{{item.ID}}">{{item.Name}}</a>
-                            <p class="price" style="font-size:15px">{{item.price| currency:"":0 | comma2dot}} VNĐ</p>
-                        </div>
-                        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2">
-                            <button type="button" class="btn btn-link" ng-click="vm.RemoveFromCart()">x</button>
-                        </div>
-                   </li>
-               </ul>                             
-           </div>
-           <div ng-show ="(Cart.length == 0) || (Cart == null)">
-                <p class="price">Không có sản phẩm trong giỏ hàng</p>
-           </div>
+            <div class="row">
+                <md-content>
+                    <md-button class="md-raised md-primary" ng-click="vm.sale()" ng-disabled ="(Cart.length == 0) || (Cart == null)"><strong>ĐẶT HÀNG<strong></md-button>
+                </md-content>
+            </div>
         </div>
     </div>
     <div class="row DETAILROW">

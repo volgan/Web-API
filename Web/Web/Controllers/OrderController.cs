@@ -13,6 +13,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OrderController : ApiController
     {
         private WebContext db = new WebContext();

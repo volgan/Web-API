@@ -243,33 +243,51 @@
         }
 
         function AddToCart(item) {
+            var BuyItem = {
+                ID: item.ID,
+                Name: item.Name,
+                price: item.price,
+                icon: item.icon,
+                Quantity: 1,
+            }
             if ($rootScope.Customer != null) {
-                $rootScope.Cart.push(item);
-                // vm.Cart = $rootScope.Cart;
-                // console.log( $rootScope.Cart);
+                if (angular.isUndefined( $rootScope.Cart) == false){
+                    console.log("new");
+                    var check = false
+                    for (var i=0; i<$rootScope.Cart.length; i++){
+                        if ($rootScope.Cart[i].ID == BuyItem.ID){
+                            check = true;
+                        }
+                    }
+                    if (check == false){
+                        $rootScope.Cart.push(BuyItem);
+                    }
+                    else{
+                        $window.alert("Sản phẩm đã có trong giỏ hàng");
+                    }
+                }
+                else{
+                    $rootScope.Cart.push(BuyItem);
+                }
             } else {
                 $window.alert("Bạn phải đăng nhập để mua hàng");
             }
         }
 
         function RemoveFromCart(index) {
-
+            $rootScope.Cart[index] = $rootScope.Cart[$rootScope.Cart.length - 1];
+            $rootScope.Cart.pop();
         }
 
         //sale product
-        function sale(item) {
+        function sale() {
             if ($rootScope.Customer != null) {
                 var modalInstance = $uibModal.open({
                     animation: vm.animationsEnabled,
                     templateUrl: 'components/item/detail/saleModal.html',
                     controller: SaleModalInstanceCtrl,
                     controllerAs: 'vm',
-                    size: 'md',
-                    resolve: {
-                        Item: function() {
-                            return item;
-                        }
-                    }
+                    size: 'lg'
                 });
             } else {
                 $window.alert("Bạn phải đăng nhập để mua hàng");
@@ -277,29 +295,28 @@
 
         }
 
-        function SaleModalInstanceCtrl($scope, $uibModalInstance, Item, $window, $rootScope, $http) 
+        function SaleModalInstanceCtrl($scope, $uibModalInstance, $window, $rootScope, $http) 
         {
             var sale         = this;
             sale.name        = $rootScope.Customer.FullName;
             sale.address     = $rootScope.Customer.Address;
             sale.phone       = $rootScope.Customer.SDT;
             sale.Email       = $rootScope.Customer.Email;
-            sale.Quantity    = 1;       
             sale.Order       = Order;
-            sale.Item        = vm.Item;
+            sale.Item        = $rootScope.Cart;
             sale.ok          = OK;
             sale.cancel      = cancel;
-            sale.CurrentDate = new Date();
+            var CurrentDate = new Date();
 
             sale.RequiredDate = new Date(
-                sale.CurrentDate.getFullYear(),
-                sale.CurrentDate.getMonth(),
-                sale.CurrentDate.getDate()+1);
+                CurrentDate.getFullYear(),
+                CurrentDate.getMonth(),
+                CurrentDate.getDate()+1);
 
             sale.maxDate = new Date(
-                sale.CurrentDate.getFullYear(),
-                sale.CurrentDate.getMonth(),
-                sale.CurrentDate.getDate()+4);
+                CurrentDate.getFullYear(),
+                CurrentDate.getMonth(),
+                CurrentDate.getDate()+4);
             // sale.ContinueShopping = ContinueShopping;
 
             function OK() {
@@ -311,14 +328,43 @@
             }
 
             function Order() {
-                // var req = {
-                //     method: 'POST',
-                //     url: 'http://localhost:2393/api/Order',
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     },
-                //     data
-                // }
+                var Orderdetail = [];
+                
+                for (var i = 0; i< $rootScope.Cart.length; i++){
+                    var detail = {
+                        ProductsID: $rootScope.Cart[i].ID,
+                        Prices: $rootScope.Cart[i].price * $rootScope.Cart[i].Quantity,
+                        Quantity: $rootScope.Cart[i].Quantity,
+                        Discount: 0
+                    }
+                    Orderdetail.push(detail);
+                }
+                var Order = {
+                    OrderDetails: Orderdetail,
+                    CustomerID : $rootScope.Customer.CustomerID,
+                    OrderDate : CurrentDate.getDate() + "/" + CurrentDate.getMonth() + "/" + CurrentDate.getFullYear() + " " + CurrentDate.getHours()
+                                +":" + CurrentDate.getMinutes() + ":"+ CurrentDate.getSeconds(),
+                    RequriedDate: sale.RequiredDate.getDate() + "/" + sale.RequiredDate.getMonth() + "/" + sale.RequiredDate.getFullYear(),
+                }
+                console.log(Order);
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:2393/api/Order',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: Order
+                }
+                $http(req).then(
+                    function sucess(response){
+                        $rootScope.Cart = [];
+                        cancel();
+                        $window.alert("Đặt hàng thành công")
+                    },
+                    function error(response){
+
+                    }
+                );
                 console.log("Đang xử lý");
             }
         }

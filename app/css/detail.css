@@ -334,8 +334,20 @@ md-input-container{
     margin: 0;
     padding: 0;
     width: 98%;
+    margin-top: 10px;
+    padding-bottom: 10px;
 }
 .CARTBLOCK{
-    height: 396px;
+    height: 300px;
     border: 1px solid #ddd;
+    margin: 0;
+    padding: 0;    
+    /*border-top-left-radius: 16px;
+    border-top-right-radius: 16px;*/
+    border-radius: 16px;
+    overflow-y: scroll;
+}
+.CARTBLOCK .modal-header{
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }

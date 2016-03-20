@@ -9,64 +9,78 @@
                 </md-button>
             </div>
         </md-toolbar>
-    </div>
-    <div class="modal-body">
+    </div> <!-- End div modal-header -->
+
+    <div class="modal-body Order">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <img ng-src="{{vm.Item.icon}}" alt="" height="200px">
-                </div>
-                <div class="row">
-                    <h4>{{vm.Item.Name | uppercase}}</h4>
-                    <p class="price">{{vm.Item.price | currency:"":0 | comma2dot}} VNĐ</p>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <md-content>
-                    <form name="SaleForm" class="Order">
-                        <md-input-container class="md-block">
+            <md-content layout-padding >  
+                <form name="SaleForm">  
+                    <div layout-gt-sm="row">                    
+                        <md-input-container class="md-block" flex-gt-xs>
                             <label for="name">Họ tên người nhận</label>
                             <input type="text" id="name" name="name" ng-model="vm.name" required/>
                             <span ng-show="SaleForm.name.$error.required && SaleForm.name.$dirty" style="color:red">required</span>
                         </md-input-container>
-                        <md-input-container class="md-block">
+                        <div flex="5" hide-xs hide-sm>
+                          <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-xs>
                             <label for="phone">Số điện thoại người nhận</label>
                             <input type="text" id="phone" name="phone" ng-model="vm.phone" required/>
                             <span ng-show="SaleForm.phone.$error.required && SaleForm.phone.$dirty" style="color:red">required</span>
                         </md-input-container>
-                        <md-input-container class="md-block">
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-xs>
                             <label for="address">Địa chỉ nhận hàng</label>
                             <input type="text" id="address" name="address" ng-model="vm.address" required/>
                             <span ng-show="SaleForm.address.$error.required && SaleForm.address.$dirty" style="color:red">required</span>
                         </md-input-container>
-                        <md-input-container class="md-block">
+                        <div flex="5" hide-xs hide-sm>
+                          <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-xs>
                             <label for="email">Email để nhận thông tin</label>
                             <input type="email" id="email" name="email" ng-model="vm.Email" required/>
                             <span ng-show="SaleForm.email.$error.required && SaleForm.email.$dirty">required</span>
                             <span ng-show="!SaleForm.email.$error.required && SaleForm.email.$error.emai&& SaleForm.email.$dirty">invalid email</span>
                         </md-input-container>
-                        <div layout-gt-sm="row">
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label for="Quantity">Số lượng</label>
-                                <input type="number" name="Quantity" id="Quantity" placeholder="" max="5" min="1" required ng-model="vm.Quantity"/>
-                                <span ng-show="SaleForm.Quantity.$error.required && SaleForm.Quantity.$dirty" style="color:red">required</span>
-                                <span ng-show="SaleForm.Quantity.$error.required && SaleForm.Quantity.$dirty" style="color:red">required</span>
-                            </md-input-container>
-                            <div flex="5" hide-xs hide-sm>
-                              <!-- Spacer //-->
-                            </div>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label for="RequiredDate">Ngày nhận hàng</label>
-                                <input type="date" name="RequiredDate" id="RequiredDate" ng-model="vm.RequiredDate" min="{{vm.RequiredDate}}" max="{{vm.maxDate}}" required="required" title="">
-                                <span ng-show="SaleForm.RequiredDate.$error.required && SaleForm.RequiredDate.$dirty" style="color:red">required</span>
-                            </md-input-container>   
+                    </div>
+                    <div layout-gt-sm="row">                        
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label for="RequiredDate">Ngày nhận hàng</label>
+                            <input type="date" name="RequiredDate" id="RequiredDate" ng-model="vm.RequiredDate" min="{{vm.RequiredDate}}" max="{{vm.maxDate}}" required="required" title="">
+                            <span ng-show="SaleForm.RequiredDate.$error.required && SaleForm.RequiredDate.$dirty" style="color:red">required</span>
+                        </md-input-container>   
+                        <div flex="5" hide-xs hide-sm>
+                          <!-- Spacer //-->
                         </div>
-                        <md-input-container class="md-block">
-                            <md-button class="md-warn md-raised md-hue-2" ng-click="vm.Order()" ng-disabled="SaleForm.$invalid" style="color: white; text-">Đặt hàng</md-button>
-                        </md-input-container>
-                    </form>
-                </md-content>
+                        <md-content>
+                            <md-button class="md-warn md-raised md-hue-2" ng-click="vm.Order()" ng-disabled="SaleForm.$invalid">
+                                <strong>Đặt hàng</strong>
+                            </md-button>
+                        </md-content>                          
+                    </div>                    
+                </form>
+            </md-content>
+        </div>   
+        <div class="row CARTBLOCK" >
+            <div class="cart"  style="padding: 0" ng-show ="Cart.length > 0">
+               <ul class="ListCart">
+                   <li class="ListItemCart row" ng-repeat="item in Cart">                        
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="border-right: 1px dotted black; text-align: center">
+                            <img src="{{item.icon}}" alt="" class="IconCart" height="70p">
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7"style="border-right: 1px dotted black">
+                            <h4 style="">{{item.Name}}</h4>
+                            <p class="price" style="font-size:20px">{{item.price| currency:"":0 | comma2dot}} VNĐ</p>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                            <button type="button" class="btn btn-link" ng-click="vm.RemoveFromCart($index)">x</button>
+                        </div>
+                   </li>
+               </ul>                       
             </div>
-        </div>
-    </div>
+        </div>        
+    </div> <!-- End div modal-body -->
 </div>
