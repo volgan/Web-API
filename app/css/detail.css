@@ -351,3 +351,21 @@ md-input-container{
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
 }
+.material-icons{
+    font-size: 50px;    
+}
+.cmtName{
+    padding: 0;
+    color: red;
+    font-weight: bold;
+}
+.cmt{
+    margin-top: 20px !important;
+    font-size:16px;
+}
+.cart p{
+    margin: 0;
+}
+.cart .btn{
+    margin-left: -8px;
+}

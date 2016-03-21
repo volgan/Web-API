@@ -78,6 +78,7 @@ namespace Web.Controllers
         public async Task<IHttpActionResult> PostCustomer(Customer customer)
         {
             //int type = 0;
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -101,7 +102,7 @@ namespace Web.Controllers
             }
             else
             {
-                if (customer.Address.Length == 0 && customer.FullName.Length == 0 && customer.SDT.Length == 0)
+                if (customer.Address.Length == 0 && customer.FullName.Length == 0 && customer.SDT.Length == 0 && (customer.Password.Equals("null")==false))
                 {
                     return Conflict();
                 }

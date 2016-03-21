@@ -18,6 +18,7 @@ namespace Web.Models
         public long CustomerID { get; set; }
         public string ProductID { get; set; }
         public string Comment1 { get; set; }
+        public int Thich { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }

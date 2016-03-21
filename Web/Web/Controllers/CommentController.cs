@@ -6,28 +6,32 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Web.Models;
 
 namespace Web.Controllers
 {
+    [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/Comment")]
     public class CommentController : ApiController
     {
         private WebContext db = new WebContext();
 
         // GET api/Comment
+        [Route("")]
         public IQueryable<Comment> GetComments()
         {
             return db.Comments;
         }
 
         // GET api/Comment/5
+        [Route("{id:int}")]
         [ResponseType(typeof(Comment))]
-        public async Task<IHttpActionResult> GetComment(int id)
+        [HttpGet]
+        public IHttpActionResult Comment(int id)
         {
-            Comment comment = await db.Comments.FindAsync(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return NotFound();
@@ -36,8 +40,32 @@ namespace Web.Controllers
             return Ok(comment);
         }
 
+        // GET api/Comment/5
+        [Route("{ProductID:length(1,50)}")]
+        [ResponseType(typeof(Comment))]
+        [HttpGet]
+        public IHttpActionResult Comment(string ProductID)
+        {
+            var query = (from cmt in db.Comments
+                         where cmt.ProductID.Equals(ProductID)
+                         select cmt).ToArray();
+            Comment[] comments;
+            if (query.Length > 0)
+            {
+                comments = new Comment[query.Length];
+                for (int i = 0; i < query.Length; i++)
+                {
+                    comments[i] = query[i];
+                }
+                return Ok(comments);
+            }
+
+            return NotFound();
+        }
         // PUT api/Comment/5
-        public async Task<IHttpActionResult> PutComment(int id, Comment comment)
+        [Route("{id:int}")]
+        [HttpPut]
+        public IHttpActionResult Comment(int id, Comment comment)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +81,7 @@ namespace Web.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,8 +99,11 @@ namespace Web.Controllers
         }
 
         // POST api/Comment
+        
+        [HttpPost]
+        [Route("")]
         [ResponseType(typeof(Comment))]
-        public async Task<IHttpActionResult> PostComment(Comment comment)
+        public IHttpActionResult Comment(Comment comment)
         {
             if (!ModelState.IsValid)
             {
@@ -80,23 +111,23 @@ namespace Web.Controllers
             }
 
             db.Comments.Add(comment);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.CommentID }, comment);
+            return Ok(comment);
         }
 
         // DELETE api/Comment/5
         [ResponseType(typeof(Comment))]
-        public async Task<IHttpActionResult> DeleteComment(int id)
+        public IHttpActionResult DeleteComment(int id)
         {
-            Comment comment = await db.Comments.FindAsync(id);
+            Comment comment = db.Comments.Find(id);
             if (comment == null)
             {
                 return NotFound();
             }
 
             db.Comments.Remove(comment);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(comment);
         }

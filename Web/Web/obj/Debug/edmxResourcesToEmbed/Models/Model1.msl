@@ -1,17 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WebServicesModelStoreContainer" CdmEntityContainer="WebServicesEntities1">
-    <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
-        <MappingFragment StoreEntitySet="OrderDetails">
-          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
-          <ScalarProperty Name="Prices" ColumnName="Prices" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Discount" ColumnName="Discount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="WebServicesModel.Product">
         <MappingFragment StoreEntitySet="Products">
@@ -207,10 +196,23 @@
     <EntitySetMapping Name="Comments">
       <EntityTypeMapping TypeName="WebServicesModel.Comment">
         <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="Thich" ColumnName="Thich" />
           <ScalarProperty Name="Comment1" ColumnName="Comment" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Prices" ColumnName="Prices" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

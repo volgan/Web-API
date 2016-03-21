@@ -1,40 +1,33 @@
 <legend>Hỏi, đáp về sản phẩm</legend>
 <form ng-submit="vm.addCmt(vm.Item)">
     <fieldset>
-        <textarea class="areaCmt" ng-model="vm.cmt" placeholder="Ý kiến của bạn về sản phẩm ..."></textarea>
-        <button type="submit" class="md-raised md-primary md-button btnCmt">
-            <strong>GỬI</strong>
-        </button>
+        <form>
+            <textarea class="areaCmt" ng-model="vm.cmt" placeholder="Ý kiến của bạn về sản phẩm ..." required="" ng-disabled="(Customer == null)"></textarea>
+            <button type="button" class="md-raised md-primary md-button btnCmt" ng-click = "vm.addCmt()">
+                <strong>GỬI</strong>
+            </button>
+        </form>
     </fieldset>
 </form>
 <ul>
-    <h4>Mới nhất</h4>
-    <li ng-repeat="cmt in vm.cmts.slice().reverse() track by $index">
-        <blockquote>
-            <img class="imgCmt" src="../images/User-Login.png">
-            <cite class="nameCmt">Quang Nhật</cite>
-            <pre class="preCmt">{{cmt}}</pre>
-            <a class="exBtnCmt">
-                <button>Thích</button>
-                <button ng-click="vm.displayRepForm()">Trả lời</button>
-                <button ng-click="vm.displayRep()">Xem tất cả câu trả lời</button>
-            </a>
-            <form ng-style="vm.showRepForm" ng-submit="vm.addRep(vm.Item)">
-                <fieldset class="replyCmt">
-                    <textarea class="areaCmt" ng-model="vm.rep" placeholder="Ý kiến của bạn ..."></textarea>
-                    <button type="submit" class="md-raised md-primary md-button btnCmt" ng-click="vm.hideRepForm()">
-                        <strong>GỬI</strong>
-                    </button>
-                </fieldset>
-            </form>
-            <fieldset ng-style="vm.showRep" ng-repeat="rep in vm.replies.slice().reverse() track by $index">
-                <img class="imgRep" src="../images/User-Login.png">
-                <cite class="nameRep">Quang Nhật</cite>
-                <pre class="preRep">{{rep}}</pre>
-                <a class="exBtnRep">
-                    <button>Thích</button>
-                </a>
-            </fieldset>
-        </blockquote>
-    </li>
+    <div style="border-bottom: 1px solid #e0e0e0"></div>
+    <div class="container">
+        <div class="cart"  style="margin-left:30px; width: 700px" ng-show ="vm.Comment.length > 0">
+           <ul class="ListCart">
+               <li class="ListItemCart row" ng-repeat="cmt in vm.Comment">                        
+                    <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2">
+                        <p><i class="material-icons">message</i></p>
+                        <p><button type="button" class="btn btn-link" ng-click="vm.like($index)">{{cmt.like}} Like</button></p>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-10 col-lg-10">
+                        <h4 class="cmtName">{{cmt.CustomerName}}</h4>
+                        <p class="cmt">{{cmt.Cmt}}</p>                    
+                    </div> 
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        
+                    </div>           
+               </li>
+           </ul>                       
+        </div>
+    </div>
 </ul>

@@ -16,11 +16,12 @@ namespace Web.Models
     {
         public int OrderID { get; set; }
         public string ProductsID { get; set; }
+        public string ProductName { get; set; }
         public long Prices { get; set; }
         public int Quantity { get; set; }
         public Nullable<float> Discount { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Order Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

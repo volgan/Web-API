@@ -25,7 +25,6 @@ namespace Web.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -34,5 +33,6 @@ namespace Web.Models
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Tablet> Tablets { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

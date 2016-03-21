@@ -13,6 +13,7 @@
           <Property Name="CustomerID" Type="bigint" Nullable="false" />
           <Property Name="ProductID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Thich" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -81,6 +82,7 @@
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ProductsID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Prices" Type="bigint" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Discount" Type="real" />
@@ -305,27 +307,14 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="OrderDetail">
-          <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="ProductsID" />
-          </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="ProductsID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Prices" Type="Int64" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Discount" Type="Single" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
-          <NavigationProperty Name="Order" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
-        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
           <Property Name="CategoryID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
           <NavigationProperty Name="Comments" Relationship="WebServicesModel.FK_Comment_Products" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="OrderDetails" Relationship="WebServicesModel.FK_OrderDetails_Products" FromRole="Product" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -337,35 +326,14 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_OrderDetails_Products">
-          <End Role="Products" Type="Self.Product" Multiplicity="1" />
-          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="ProductID" />
-            </Principal>
-            <Dependent Role="OrderDetails">
-              <PropertyRef Name="ProductsID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="WebServicesEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="OrderDetails" EntitySet="OrderDetails" />
-          </AssociationSet>
           <EntitySet Name="Customers" EntityType="WebServicesModel.Customer" />
           <EntitySet Name="Orders" EntityType="WebServicesModel.Order" />
           <AssociationSet Name="FK_Orders_Customer" Association="WebServicesModel.FK_Orders_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetails_Orders" Association="WebServicesModel.FK_OrderDetails_Orders">
-            <End Role="Order" EntitySet="Orders" />
-            <End Role="OrderDetail" EntitySet="OrderDetails" />
           </AssociationSet>
           <EntitySet Name="Laptops" EntityType="WebServicesModel.Laptop" />
           <EntitySet Name="Phones" EntityType="WebServicesModel.Phone" />
@@ -379,7 +347,16 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Comment" EntitySet="Comments" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="OrderDetails" EntityType="WebServicesModel.OrderDetail" />
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="WebServicesModel.FK_OrderDetails_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="WebServicesModel.FK_OrderDetails_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -413,18 +390,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetails_Orders">
-          <End Type="WebServicesModel.Order" Role="Order" Multiplicity="1" />
-          <End Type="WebServicesModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -584,6 +549,7 @@
           <Property Name="CustomerID" Type="Int64" Nullable="false" />
           <Property Name="ProductID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Comment1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thich" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="WebServicesModel.FK_Comment_Customer" FromRole="Comment" ToRole="Customer" />
           <NavigationProperty Name="Product" Relationship="WebServicesModel.FK_Comment_Products" FromRole="Comment" ToRole="Product" />
         </EntityType>
@@ -611,23 +577,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductsID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductsID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prices" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Single" />
+          <NavigationProperty Name="Order" Relationship="WebServicesModel.FK_OrderDetails_Orders" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="WebServicesModel.FK_OrderDetails_Products" FromRole="OrderDetail" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Type="WebServicesModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="WebServicesModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Type="WebServicesModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="WebServicesModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ProductsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="WebServicesModelStoreContainer" CdmEntityContainer="WebServicesEntities1">
-          <EntitySetMapping Name="OrderDetails">
-            <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
-              <MappingFragment StoreEntitySet="OrderDetails">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
-                <ScalarProperty Name="Prices" ColumnName="Prices" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="WebServicesModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -823,10 +816,23 @@
           <EntitySetMapping Name="Comments">
             <EntityTypeMapping TypeName="WebServicesModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Thich" ColumnName="Thich" />
                 <ScalarProperty Name="Comment1" ColumnName="Comment" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Prices" ColumnName="Prices" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

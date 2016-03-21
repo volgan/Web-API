@@ -14,11 +14,17 @@
     function DataService($http, $stateParams) {
         return {
             getData: getData,
-            getphuKien: getphuKien
+            getphuKien: getphuKien,
+            getComment: getComment
         }
 
         function getData() {
             return $http.get('http://localhost:2393/api/' + $stateParams.type + '/' + $stateParams.ID)
+                .success(getComplete);
+        }
+
+        function getComment(){
+            return $http.get('http://localhost:2393/api/Comment/' + $stateParams.ID)
                 .success(getComplete);
         }
 
@@ -53,10 +59,9 @@
     }
 
     ItemDetailController.$inject = ['$scope', 'DataService', '$uibModal', '$stateParams', '$rootScope',
-        '$window'
-    ];
+        '$window', '$http'];
 
-    function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope, $window) {
+    function ItemDetailController($scope, DataService, $uibModal, $stateParams, $rootScope, $window,$http) {
         var vm               = this;
         vm.Item              = {};
         vm.type              = $stateParams.type;
@@ -67,30 +72,18 @@
         vm.index             = 0;
         vm.length            = 0;
         
+        vm.Comment           = [];
+        vm.cmt               = "";
+        vm.like              = like;
+        vm.addCmt            = addCmt;
+        
         vm.next              = NEXT;
         vm.prev              = PREV;
         vm.selectIMG         = selectIMG;
         
         vm.AddToCart         = AddToCart;
         vm.RemoveFromCart    = RemoveFromCart;
-        
-        vm.cmts              = [];
-        vm.replies           = [];
-        
-        vm.addCmt            = addCmt;
-        vm.addRep            = addRep;
-        vm.displayRepForm    = displayRepForm;
-        vm.displayRep        = displayRep;
-        vm.showRepForm = {
-            display: 'none'
-        };
-        vm.showRep = {
-            display: 'none'
-        };
-        vm.rep;
-        vm.cmt;
-
-
+                
 
         //Get Phu Kien        
         var TypePK_laptop = ['tai nghe', 'chuột', 'bàn phím', 'usb', 'loa', 'adapter'];
@@ -152,42 +145,80 @@
         }
 
         // Comment
-        function addCmt(phone) {
-            vm.cmts.push(vm.cmt);
-            vm.showRep = {
-                display: 'none'
-            };
-            vm.showRepForm = {
-                display: 'none'
-            };
-            vm.cmt = null;
+
+        activated_Cmt();
+
+        function activated_Cmt() {
+            return getCmt();
         }
 
-        function addRep(phone) {
-            vm.replies.push(vm.rep);
-            vm.showRep = {
-                display: 'block'
-            };
-            vm.rep = null;
+        function getCmt(){
+            return DataService.getComment()
+                .success(function(data) {
+                    for (var i = 0; i<data.length; i++){
+                        var temp = {
+                            CommentID : data[i].CommentID,
+                            CustomerID : data[i].Customer.CustomerID,
+                            CustomerName: data[i].Customer.FullName,
+                            Cmt: data[i].Comment1,
+                            like: data[i].Thich
+                        }
+                        vm.Comment.push(temp);
+
+                    }
+                });
         }
 
-        function displayRepForm() {
-            vm.showRepForm = {
-                display: 'block'
-            };
+        function like(index){
+            vm.Comment[index].like = vm.Comment[index].like + 1;
+            var req = {
+                method: 'PUT',
+                url: 'http://localhost:2393/api/Comment/'+vm.Comment[index].CommentID,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    CommentID : vm.Comment[index].CommentID,
+                    CustomerID : vm.Comment[index].CustomerID,
+                    ProductID : vm.Item.ID,
+                    Comment1 : vm.Comment[index].Cmt,
+                    Thich: vm.Comment[index].like
+                }
+            }
+            $http(req).then(
+                function seccess(response){
+                    // vm.Comment[index] = response.data;
+                },
+                function error(response){
+                    
+                }
+            );
         }
 
-        function hideRepForm() {
-            vm.showRepForm = {
-                display: 'none'
-            };
-        }
-
-        function displayRep() {
-            vm.showRep = {
-                display: 'block'
-            };
-        }
+        function addCmt() {
+            var req = {
+                method: 'POST',
+                url : 'http://localhost:2393/api/Comment',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    'CustomerID' : $rootScope.Customer.CustomerID,
+                    'ProductID'  : vm.Item.ID,
+                    'Comment1'   : vm.cmt,
+                    'Thich'      : 0
+                }
+            }
+            $http(req).then(
+                function success(response){
+                    vm.Comment = [];
+                    activated_Cmt();
+                },
+                function error(response){
+                    
+                }
+            );
+        }    
 
         //Modal function
         function ModalOpen() {
@@ -333,6 +364,7 @@
                 for (var i = 0; i< $rootScope.Cart.length; i++){
                     var detail = {
                         ProductsID: $rootScope.Cart[i].ID,
+                        ProductName: $rootScope.Cart[i].Name,
                         Prices: $rootScope.Cart[i].price * $rootScope.Cart[i].Quantity,
                         Quantity: $rootScope.Cart[i].Quantity,
                         Discount: 0

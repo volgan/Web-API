@@ -99,7 +99,7 @@
                        </ul>                       
                     </div>
                     <div ng-show ="(Cart.length == 0) || (Cart == null)">
-                        <p class="price">Không có sản phẩm trong giỏ hàng</p>
+                        
                     </div>
                </div>                
             </div>
@@ -138,7 +138,7 @@
                         <div ng-include="'components/item/detail/phu-kien.html'" scope="" onload=""></div>
                     </md-content>
                 </md-tab>
-                <md-tab label="Bình Luận">
+                <md-tab label="Bình Luận ({{vm.Comment.length}})">
                     <md-content>
                         <div ng-include="'components/item/detail/comment.html'" scope="" onload=""></div>
                     </md-content>
