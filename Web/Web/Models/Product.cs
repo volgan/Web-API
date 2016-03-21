@@ -17,11 +17,13 @@ namespace Web.Models
         public Product()
         {
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.Comments = new HashSet<Comment>();
         }
     
         public string CategoryID { get; set; }
         public string ProductID { get; set; }
     
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

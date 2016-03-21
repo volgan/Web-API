@@ -5,17 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2032e584e4fc491db4818d036f7aa8a7" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="WebServicesModel.OrderDetail" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="WebServicesModel.Product" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebServicesModel.OrderDetail" Width="1.5" PointX="4.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebServicesModel.Product" Width="1.5" PointX="0.875" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WebServicesModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="WebServicesModel.FK_OrderDetails_Products" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="WebServicesModel.Customer" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="WebServicesModel.Order" Width="1.5" PointX="3" PointY="5.75" />
-        <AssociationConnector Association="WebServicesModel.FK_Orders_Customer" />
-        <AssociationConnector Association="WebServicesModel.FK_OrderDetails_Orders" />
-        <EntityTypeShape EntityType="WebServicesModel.Laptop" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="WebServicesModel.Phone" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WebServicesModel.Customer" Width="1.5" PointX="4" PointY="5.875" />
+        <EntityTypeShape EntityType="WebServicesModel.Order" Width="1.5" PointX="7.25" PointY="0.75" />
+        <AssociationConnector Association="WebServicesModel.FK_Orders_Customer" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="WebServicesModel.FK_OrderDetails_Orders" ></AssociationConnector>
+        <EntityTypeShape EntityType="WebServicesModel.Laptop" Width="1.5" PointX="13.625" PointY="1" />
+        <EntityTypeShape EntityType="WebServicesModel.Phone" Width="1.5" PointX="11.375" PointY="1" />
         <EntityTypeShape EntityType="WebServicesModel.Tablet" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="WebServicesModel.Comment" Width="1.5" PointX="0.75" PointY="6" />
+        <AssociationConnector Association="WebServicesModel.FK_Comment_Customer" />
+        <AssociationConnector Association="WebServicesModel.FK_Comment_Products" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

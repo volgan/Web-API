@@ -12,22 +12,14 @@ namespace Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Comment
     {
-        public Customer()
-        {
-            this.Orders = new HashSet<Order>();
-            this.Comments = new HashSet<Comment>();
-        }
-    
+        public int CommentID { get; set; }
         public long CustomerID { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FullName { get; set; }
-        public string SDT { get; set; }
-        public string Address { get; set; }
+        public string ProductID { get; set; }
+        public string Comment1 { get; set; }
     
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

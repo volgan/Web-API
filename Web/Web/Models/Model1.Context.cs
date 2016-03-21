@@ -33,5 +33,6 @@ namespace Web.Models
         public virtual DbSet<Laptop> Laptops { get; set; }
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Tablet> Tablets { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     }
 }
