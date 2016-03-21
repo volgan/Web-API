@@ -20,6 +20,7 @@
         vm.animationsEnabled = true;
         vm.register          = register;
         vm.Login             = Login;
+        vm.Edit              = Edit;
         vm.isLogin           = $rootScope.isLogin;
         $scope.sessionLogin  = SessionService.get('login');
 
@@ -46,6 +47,21 @@
             });
         }
 
+        function Edit(){
+            var modalInstance = $uibModal.open({
+                animation: vm.animationsEnabled,
+                templateUrl: 'components/InfoAcount/EditInfo.html',
+                controller: EditModalCtr,
+                controllerAs: 'vm',
+                size: 'lg'
+            });
+        }
+
+        function EditModalCtr(){
+            
+        }
+
+        
         function Login() {
             var modalInstance = $uibModal.open({
                 animation: vm.animationsEnabled,
