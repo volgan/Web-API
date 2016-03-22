@@ -19,28 +19,20 @@
 
         function getphones() {
             return $http.get('http://localhost:2393/api/Phone')
-                .success(getphoneComplete);
-        }
-
-        function getphoneComplete(response) {
-            return response.data;
+                .success(getData);
         }
 
         function getTablets() {
             return $http.get('http://localhost:2393/api/Tablet')
-                .success(getTabletComplete);
-        }
-
-        function getTabletComplete(response) {
-            return response.data;
+                .success(getData);
         }
 
         function getLaptops() {
             return $http.get('http://localhost:2393/api/Laptop')
-                .success(getphoneComplete);
+                .success(getData);
         }
 
-        function getphoneComplete(response) {
+        function getData(response) {
             return response.data;
         }
     }

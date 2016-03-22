@@ -13,6 +13,7 @@ using Web.Models;
 namespace Web.Controllers
 {
     [System.Web.Http.Cors.EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Web.Filter.Log]
     [RoutePrefix("api/Comment")]
     public class CommentController : ApiController
     {

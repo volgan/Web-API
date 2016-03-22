@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="WebServicesModel.Comment" Width="1.5" PointX="0.875" PointY="5.625" />
         <AssociationConnector Association="WebServicesModel.FK_Comment_Customer" />
         <AssociationConnector Association="WebServicesModel.FK_Comment_Products" />
-        <EntityTypeShape EntityType="WebServicesModel.OrderDetail" Width="1.5" PointX="3.75" PointY="0.875" />
+        <EntityTypeShape EntityType="WebServicesModel.OrderDetail" Width="1.5" PointX="4" PointY="1" />
         <AssociationConnector Association="WebServicesModel.FK_OrderDetails_Orders" />
         <AssociationConnector Association="WebServicesModel.FK_OrderDetails_Products" />
         </Diagram>

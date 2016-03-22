@@ -1,0 +1,47 @@
+<div class="row">
+    <h1 class="myOrder">ĐƠN HÀNG CỦA TÔI</h1>
+</div>
+<div class="row">
+    <div class="container">
+        <ul class="myOrder-list">
+          <li ng-repeat="Order in vm.OrderList">
+            <div class="order_state_collapsed">
+              <header class="row order__headline">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p style="text-transform: uppercase">Mã đơn hàng: <span class="OrderID">{{Order.OrderID}}</span></p>
+                  <p>Đặt ngày: {{Order.OrderDate}}</p>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                  <p>THÀNH TIỀN</p>
+                  <p>{{Order.TotalPrice | currency:"":0 | comma2dot}} VNĐ</p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <p>THANH TOÁN</p>
+                  <p>Thanh toán khi nhận hàng</p>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                  <button type="button" class="btn btn-link" ng-click="vm.showOrderDetail($index)">Chi tiết</button>
+                </div>
+              </header>
+              <div class="order-body container" ng-show="vm.show[$index]">
+                <table class="table table-condensed">
+                  <tbody>
+                    <tr ng-repeat = "detail in Order.OrderDetails">
+                      <td class="OrderDetail_Icon"><img src="{{detail.icon}}" alt="" height="75px"></td>
+                      <td class="OrderDetail_Product">
+                        <p class="OrderDetail_ProductName">{{detail.ProductName}}</p>
+                        <p>Số lượng: {{detail.Quantity}}</p>
+                      </td>
+                      <td class="OrderDetail_ProductPrice">{{detail.Prices| currency:"":0 | comma2dot}} VNĐ</td>
+                      <td>
+                        <img src="../images/Capture.png" alt="">
+                      </td>                      
+                    </tr>
+                  </tbody>
+
+                </table>
+            </div>    
+          </li>
+      </ul>
+    </div>
+</div>

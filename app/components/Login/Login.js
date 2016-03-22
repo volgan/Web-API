@@ -50,15 +50,71 @@
         function Edit(){
             var modalInstance = $uibModal.open({
                 animation: vm.animationsEnabled,
-                templateUrl: 'components/InfoAcount/EditInfo.html',
-                controller: EditModalCtr,
+                templateUrl: 'components/Login/InfoAccount.html',
+                controller: EditModalCtrl,
                 controllerAs: 'vm',
                 size: 'lg'
             });
         }
 
-        function EditModalCtr(){
-            
+        function EditModalCtrl($scope, $uibModalInstance, $window, $rootScope, $http){
+            // console.log($rootScope.Customer)
+            var edit         = this;
+            edit.name        = $rootScope.Customer.FullName;
+            edit.address     = $rootScope.Customer.Address;
+            edit.phone       = $rootScope.Customer.SDT;
+            edit.Email       = $rootScope.Customer.Email;
+            edit.Password    = $rootScope.Customer.Password;
+            edit.Update      = Update;
+            edit.Close       = Close;
+            edit.ok          = OK;
+            edit.cancel      = cancel;
+            // console.log(edit);
+            function OK() {
+                $uibModalInstance.close(edit.selected.item);
+            }
+
+            function cancel() {
+                $uibModalInstance.dismiss('cancel');
+            }
+
+            function Close(){
+                cancel();
+            }
+
+            function Update() {
+                var Update = {
+                    CustomerID : $rootScope.Customer.CustomerID,
+                    FullName : edit.name,
+                    Email : edit.Email,
+                    Password : edit.Password,
+                    SDT : edit.phone ,
+                    Address : edit.address
+                }
+                console.log($rootScope.Customer.CustomerID);
+                var req = {
+                    method: 'PUT',
+                    url: 'http://localhost:2393/api/Customer/'+ $rootScope.Customer.CustomerID,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: Update
+                }
+                $http(req).then(
+                    function sucess(response){
+                        $rootScope.Customer.FullName = edit.name;
+                        $rootScope.Customer.Address  = edit.address;
+                        $rootScope.Customer.SDT      = edit.phone;
+                        $rootScope.Customer.Email    = edit.Email;
+                        $rootScope.Customer.Password = edit.Password;
+                        $rootScope.Customer.CustomerID = $rootScope.Customer.CustomerID;
+                        cancel();
+                    },
+                    function error(response){
+
+                    }
+                );                
+            }
         }
 
         

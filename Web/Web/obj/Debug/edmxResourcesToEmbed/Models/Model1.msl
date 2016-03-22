@@ -208,6 +208,7 @@
       <EntityTypeMapping TypeName="WebServicesModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetails">
           <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="icon" ColumnName="icon" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Prices" ColumnName="Prices" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />

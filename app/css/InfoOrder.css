@@ -1,0 +1,65 @@
+.myOrder {
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.order__headline{
+    position: relative;
+    padding: 12px 32px 12px 35px;
+    background: #ebf5f7;
+    font-size: 15px;
+    cursor: pointer;
+    width: 1137px;
+    margin-left:0;    
+}
+.OrderID{
+    color:#199cb7;
+    text-decoration: underline;
+}
+.myOrder-list .btn{
+    font-size: 15px;
+    color: red;
+    font-weight: bold;
+}
+.order_state_collapsed{
+    border: 1px solid #d3e2e5;
+    color: #646464;
+}
+.myOrder-list li{
+    list-style: none;
+    margin-bottom: 15px;
+    margin-top: 15px
+}
+.table{
+    width: 90%;
+    margin-top: 20px;
+    margin-left:20px;
+}
+.table>tbody>tr:first-child td{
+    border-top: none;
+}
+.table>tbody>tr>td:last-child{
+    text-align: right;
+}
+
+.OrderDetail_Icon{
+    width: 75px
+}
+
+.OrderDetail_Product{
+    padding-top: 15px !important;
+    padding-left: 15px !important
+}
+.OrderDetail_ProductName{
+    font-size: 25px;
+    font-weight: bold    
+}
+.OrderDetail_ProductPrice {
+    padding-top: 15px !important;
+    color: #d0021b;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.3em;
+}

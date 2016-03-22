@@ -328,17 +328,22 @@
 
         function SaleModalInstanceCtrl($scope, $uibModalInstance, $window, $rootScope, $http) 
         {
-            var sale         = this;
-            sale.name        = $rootScope.Customer.FullName;
-            sale.address     = $rootScope.Customer.Address;
-            sale.phone       = $rootScope.Customer.SDT;
-            sale.Email       = $rootScope.Customer.Email;
-            sale.Order       = Order;
-            sale.Item        = $rootScope.Cart;
-            sale.ok          = OK;
-            sale.cancel      = cancel;
+            var sale        = this;
+            sale.name       = $rootScope.Customer.FullName;
+            sale.address    = $rootScope.Customer.Address;
+            sale.phone      = $rootScope.Customer.SDT;
+            sale.Email      = $rootScope.Customer.Email;
+            sale.Order      = Order;
+            sale.Item       = $rootScope.Cart;
+            sale.ok         = OK;
+            sale.cancel     = cancel;
+            sale.TotalPrice = 0;
             var CurrentDate = new Date();
 
+            for (var i = 0; i< $rootScope.Cart.length; i++){
+                sale.TotalPrice = sale.TotalPrice + ($rootScope.Cart[i].price * $rootScope.Cart[i].Quantity);
+            }
+            
             sale.RequiredDate = new Date(
                 CurrentDate.getFullYear(),
                 CurrentDate.getMonth(),
@@ -359,14 +364,15 @@
             }
 
             function Order() {
-                var Orderdetail = [];
-                
+                var Orderdetail = [];                
                 for (var i = 0; i< $rootScope.Cart.length; i++){
+                    
                     var detail = {
                         ProductsID: $rootScope.Cart[i].ID,
                         ProductName: $rootScope.Cart[i].Name,
                         Prices: $rootScope.Cart[i].price * $rootScope.Cart[i].Quantity,
                         Quantity: $rootScope.Cart[i].Quantity,
+                        Icon: $rootScope.Cart[i].icon,
                         Discount: 0
                     }
                     Orderdetail.push(detail);
@@ -389,7 +395,7 @@
                 }
                 $http(req).then(
                     function sucess(response){
-                        $rootScope.Cart = [];
+                        $rootScope.Cart = [];                        
                         cancel();
                         $window.alert("Đặt hàng thành công")
                     },

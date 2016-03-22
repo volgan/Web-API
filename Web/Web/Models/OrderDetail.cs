@@ -19,6 +19,7 @@ namespace Web.Models
         public string ProductName { get; set; }
         public long Prices { get; set; }
         public int Quantity { get; set; }
+        public string icon { get; set; }
         public Nullable<float> Discount { get; set; }
     
         public virtual Order Order { get; set; }

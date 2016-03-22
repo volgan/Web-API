@@ -11,7 +11,8 @@
             'Home',            
             'ItemController',
             'AccessoryController',
-            'Location'
+            'Location',
+            'InfoOrder'
         ])
         .config(configFunc)
         .factory('SessionService', SessionService)  
@@ -64,7 +65,12 @@
                 controller: 'LocationController',
                 controllerAs: 'vm'
             })
-
+            .state('InfoOrder', {
+                url: '/InfoOrder',
+                templateUrl: 'components/InfoOrder/infoorder.html',
+                controller: 'InfoOrderController',
+                controllerAs: 'vm'
+            })
     }
 
     SessionService.$inject = ['$http'];

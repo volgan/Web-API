@@ -2,7 +2,7 @@
     <div class="modal-header">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>ĐẶT HÀNG ONLINE</h2>
+                <h2>SỬA THÔNG TIN KHÁCH HÀNG</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="vm.cancel()">
                     <md-icon md-svg-src="images/Close.svg" aria-label="Close dialog"></md-icon>
@@ -17,7 +17,7 @@
                 <form name="SaleForm">  
                     <div layout-gt-sm="row">                    
                         <md-input-container class="md-block" flex-gt-xs>
-                            <label for="name">Họ tên người nhận</label>
+                            <label for="name">Họ tên khách hàng</label>
                             <input type="text" id="name" name="name" ng-model="vm.name" required/>
                             <span ng-show="SaleForm.name.$error.required && SaleForm.name.$dirty" style="color:red">required</span>
                         </md-input-container>
@@ -25,45 +25,53 @@
                           <!-- Spacer //-->
                         </div>
                         <md-input-container class="md-block" flex-gt-xs>
-                            <label for="phone">Số điện thoại người nhận</label>
+                            <label for="phone">Số điện thoại</label>
                             <input type="text" id="phone" name="phone" ng-model="vm.phone" required/>
                             <span ng-show="SaleForm.phone.$error.required && SaleForm.phone.$dirty" style="color:red">required</span>
                         </md-input-container>
                     </div>
                     <div layout-gt-sm="row">
                         <md-input-container class="md-block" flex-gt-xs>
-                            <label for="address">Địa chỉ nhận hàng</label>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" ng-disabled="true" name="email" ng-model="vm.Email" required/>
+                            <span ng-show="SaleForm.email.$error.required && SaleForm.email.$dirty">required</span>
+                            <span ng-show="!SaleForm.email.$error.required && SaleForm.email.$error.emai&& SaleForm.email.$dirty">invalid email</span>
+                        </md-input-container>
+                        
+                        <div flex="5" hide-xs hide-sm>
+                          <!-- Spacer //-->
+                        </div>
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label for="address">Mật khẩu</label>
+                            <input type="password" id="address" ng-disabled="true" name="address" ng-model="vm.Password" required/>
+                            <span ng-show="SaleForm.address.$error.required && SaleForm.address.$dirty" style="color:red">required</span>
+                        </md-input-container> 
+                    </div>
+                    <div layout-gt-sm="row">          
+                        <md-input-container class="md-block" flex-gt-xs>
+                            <label for="address">Địa chỉ khách hàng</label>
                             <input type="text" id="address" name="address" ng-model="vm.address" required/>
                             <span ng-show="SaleForm.address.$error.required && SaleForm.address.$dirty" style="color:red">required</span>
-                        </md-input-container>
+                        </md-input-container>                    
                         <div flex="5" hide-xs hide-sm>
                           <!-- Spacer //-->
                         </div>
-                        <md-input-container class="md-block" flex-gt-xs>
-                            <label for="email">Email để nhận thông tin</label>
-                            <input type="email" id="email" name="email" ng-model="vm.Email" required disabled="" />
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row">                        
-                        <md-input-container class="md-block" flex-gt-xs>
-                            <label for="RequiredDate">Ngày nhận hàng</label>
-                            <input type="date" name="RequiredDate" id="RequiredDate" ng-model="vm.RequiredDate" min="{{vm.RequiredDate}}" max="{{vm.maxDate}}" required="required" title="">
-                            <span ng-show="SaleForm.RequiredDate.$error.required && SaleForm.RequiredDate.$dirty" style="color:red">required</span>
-                        </md-input-container>   
-                        <div flex="5" hide-xs hide-sm>
-                          <!-- Spacer //-->
-                        </div>
-                        
+                        <md-content>
+                            <md-button class="md-warn md-raised md-hue-2" ng-click="vm.Update()" ng-disabled="SaleForm.$invalid">
+                                <strong>Cập nhật</strong>
+                            </md-button>
+                        </md-content>                          
                     </div>
                     <md-content>
-                        <md-button class="md-warn md-raised md-hue-2" ng-click="vm.Order()" ng-disabled="SaleForm.$invalid">
-                            <strong>Đặt hàng</strong>
+                        <md-button class="md-raised md-primary md-hue-2" href="#/InfoOrder"
+                        ng-click="vm.Close()">
+                            <strong>Xem các đơn đặt hàng</strong>
                         </md-button>
-                    </md-content>                  
+                    </md-content>                    
                 </form>
             </md-content>
         </div>   
-        <div class="row CARTBLOCK" >
+        <!-- <div class="row CARTBLOCK" >
             <div class="cart"  style="padding: 0" ng-show ="Cart.length > 0">
                <ul class="ListCart">
                    <li class="ListItemCart row" ng-repeat="item in Cart">                        
@@ -80,6 +88,6 @@
                    </li>
                </ul>                       
             </div>
-        </div>        
+        </div>      -->   
     </div> <!-- End div modal-body -->
 </div>
